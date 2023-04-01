@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<{
    console.log(arrayFilterQuery);
 
    const searchQuery = Array.isArray(search) ? search[0] : search ?? '';
-
+   console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
    const encodedUrl = encodeURI(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/temple/aa/?search=${searchQuery}&page=${pageQuery}&filter=${filterQuery}`,
    );
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps<{
          }),
       );
    } catch (error) {
-      // console.log(error)
+      console.log(error)
    }
 
    return {
