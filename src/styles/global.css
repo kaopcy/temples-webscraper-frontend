@@ -68,7 +68,7 @@
    h2,
    h3,
    h4 {
-      @apply  text-text;
+      @apply text-text;
    }
    h1 {
       @apply text-xl font-bold md:text-2xl;
@@ -90,7 +90,7 @@
       @apply text-base font-normal transition-colors;
    }
    p {
-      @apply   font-normal text-text;
+      @apply font-normal text-text;
    }
    button:focus-visible {
       @apply border-transparent outline-transparent;
@@ -117,4 +117,10 @@ body {
    box-sizing: border-box;
    padding: 0;
    margin: 0;
+}
+
+#nprogress .bar {
+   height: 3px;
+   background: #303030;
+   background: linear-gradient(90deg, #303030 0%, rgba(255, 255, 255, 1) 100%);
 }

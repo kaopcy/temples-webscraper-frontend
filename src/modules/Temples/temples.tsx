@@ -19,11 +19,13 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
    page,
 }) => {
    const [hovering, setHovering] = useState<boolean>(false);
-   const { isFallback } = useRouter();
-
+   const { beforePopState } = useRouter();
    useEffect(() => {
-      console.log('isFallback: ', isFallback);
-   }, [isFallback]);
+      beforePopState((state) => {
+         state.options.scroll = false;
+         return true;
+      });
+   }, [])
 
    return (
       <Layout pageKey={page}>

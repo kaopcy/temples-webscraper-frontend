@@ -1,6 +1,7 @@
 import { motion, Variants } from 'framer-motion';
 import { useContext } from 'react';
 import { PageTransitionContext } from '../contexts/PageTransitionContext';
+import { useReducedMotionVariant } from '@/hooks/useReducedMotionVariants';
 
 const wrapperVariants: Variants = {
    initial: (isRight: number) => ({
@@ -17,8 +18,8 @@ const wrapperVariants: Variants = {
    }),
    exit: (isRight: number) => ({
       clipPath: isRight
-      ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
-      : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+         ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
+         : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
       transition: { duration: 0.7 },
    }),
 };
@@ -40,6 +41,9 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
    pageKey,
 }) => {
    const { isRight } = useContext(PageTransitionContext);
+
+   const { getReducedVariant } = useReducedMotionVariant();
+
    return (
       <motion.div
          key={pageKey}

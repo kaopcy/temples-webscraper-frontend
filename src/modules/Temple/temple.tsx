@@ -17,7 +17,12 @@ import { useRouter } from 'next/router';
 import { getServerSideProps } from './ssr';
 
 const Temple: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ temple }) => {
-   const { back } = useRouter();
+   const { back, beforePopState } = useRouter();
+
+   beforePopState((state) => {
+      state.options.scroll = false;
+      return true;
+   });
 
    return (
       <Layout pageKey={temple.name}>
