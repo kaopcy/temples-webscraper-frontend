@@ -17,8 +17,8 @@ const wrapperVariants: Variants = {
    }),
    exit: (isRight: number) => ({
       clipPath: isRight
-         ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
-         : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+      ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
+      : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
       transition: { duration: 0.7 },
    }),
 };
@@ -40,7 +40,6 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
    pageKey,
 }) => {
    const { isRight } = useContext(PageTransitionContext);
-
    return (
       <motion.div
          key={pageKey}
