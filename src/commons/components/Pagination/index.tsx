@@ -13,11 +13,11 @@ const Pagination: React.FC<{ totalPages: number; curPage: number }> = ({ totalPa
       e.preventDefault();
       push(
          {
-            href: `/test/[page]`,
+            href: `/temples/${value}`,
             query: { search: searchQuery, filter: provinceFilter, page: value },
          },
          {
-            href: `/test/[page]`,
+            href: `/temples/${value}`,
             query: { search: searchQuery, filter: provinceFilter, page: value },
          },
          { scroll: false },
