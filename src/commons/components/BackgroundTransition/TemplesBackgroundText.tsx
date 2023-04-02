@@ -18,13 +18,13 @@ const TemplesBackgroundText: React.FC<{ router: Router }> = ({ router }) => {
 
    const renderFilter = () =>
       router.query.filter && (
-         <div className=" my-4 mr-4 w-full max-w-[500px] text-center text-lg font-bold text-stone-100 md:text-xl">
+         <div className=" my-4 mr-4 w-full max-w-[500px] px-4 text-center text-lg font-bold text-stone-100 md:text-xl">
             จังหวัด{filterQuery}
          </div>
       );
 
    return (
-      <div className=" mb-10 flex flex-col items-center w-full">
+      <div className=" mb-10 flex w-full flex-col items-center">
          <h1 className="my-10 whitespace-nowrap text-6xl tracking-wider text-stone-50 sm:text-7xl">
             วัดไทย.
          </h1>
