@@ -17,15 +17,9 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
    temples,
    options,
    page,
+   search
 }) => {
    const [hovering, setHovering] = useState<boolean>(false);
-   const { beforePopState } = useRouter();
-   useEffect(() => {
-      beforePopState((state) => {
-         state.options.scroll = false;
-         return true;
-      });
-   }, [])
 
    return (
       <Layout pageKey={page}>
@@ -65,7 +59,7 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
                <HomeProvinceFilter />
             </Popout>
 
-            <HomeSearchResult />
+            <HomeSearchResult search={search} />
 
             <Pagination curPage={parseInt(page)} totalPages={options.totalPages} />
             <div className="mx-auto flex w-full max-w-[1000px] items-start justify-center  gap-x-14">

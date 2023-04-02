@@ -5,10 +5,12 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 export interface IProvinceFilterState {
    provinceFilter: ProvinceFilter;
+   error: string | null;
 }
 
 const initialState: IProvinceFilterState = {
    provinceFilter: [],
+   error: null,
 };
 
 type PayloadAddFilter = PayloadAction<{ provinces: ProvinceEnum[] | ProvinceEnum }>;
@@ -35,6 +37,7 @@ const ProvinceFilterSlice = createSlice({
          }
       },
       addFilter: (state, { payload: { provinces } }: PayloadAddFilter) => {
+         state.error = null;
          if (Array.isArray(provinces))
             provinces.forEach((province) => {
                const index = state.provinceFilter.indexOf(province);
@@ -50,6 +53,10 @@ const ProvinceFilterSlice = createSlice({
          }
       },
       deleteFilter: (state, { payload: { provinces } }: PayloadDeleteFilter) => {
+         if (state.provinceFilter.length == 1) {
+            state.error = 'เลือกอย่างน้อย 1 จังหวัด';
+            return;
+         }
          if (Array.isArray(provinces))
             provinces.forEach((province) => {
                const index = state.provinceFilter.indexOf(province);
@@ -67,8 +74,13 @@ const ProvinceFilterSlice = createSlice({
       toggleFilter: (state, { payload: { province } }: PayloadToggleFilter) => {
          const index = state.provinceFilter.indexOf(province);
          if (index === -1) {
+            state.error = null;
             state.provinceFilter.push(province);
          } else {
+            if (state.provinceFilter.length == 1) {
+               state.error = 'เลือกอย่างน้อย 1 จังหวัด';
+               return;
+            }
             state.provinceFilter.splice(index, 1);
          }
       },
@@ -79,7 +91,7 @@ const ProvinceFilterSlice = createSlice({
             ...state,
             ...action.payload.provinceFilter,
          };
-      }
+      },
    },
 });
 

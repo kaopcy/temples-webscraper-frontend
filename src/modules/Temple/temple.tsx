@@ -17,12 +17,7 @@ import { useRouter } from 'next/router';
 import { getServerSideProps } from './ssr';
 
 const Temple: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ temple }) => {
-   const { back, beforePopState } = useRouter();
-
-   beforePopState((state) => {
-      state.options.scroll = false;
-      return true;
-   });
+   const { back } = useRouter();
 
    return (
       <Layout pageKey={temple.name}>
@@ -31,7 +26,7 @@ const Temple: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> =
                <button
                   type="button"
                   onClick={() => back()}
-                  className="absolute  right-2 md:right-8 -top-10  md:top-2 "
+                  className="absolute  right-2 -top-10 md:right-8  md:top-2 "
                >
                   <Icon className="h-8 w-8 text-gray-300" icon="eva:close-fill" />
                </button>
