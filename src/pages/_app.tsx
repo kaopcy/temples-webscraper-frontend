@@ -10,6 +10,7 @@ import type { AppProps } from 'next/app';
 
 import BackgroundTransition from '@/components/BackgroundTransition';
 import { PageTransitionProvider } from '@/contexts/PageTransitionContext';
+import Toolbar from '@/components/Toolbar';
 
 const LineSeedFont = localFont({
    src: [
@@ -60,6 +61,7 @@ export function App({ Component, ...rest }: AppProps) {
                   >
                      <Component key={router.asPath} {...pageProps} />
                   </AnimatePresence>
+            <Toolbar />
                </PageTransitionProvider>
             </BackgroundTransition>
          </main>
