@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PageTransitionContext } from '../contexts/PageTransitionContext';
 import { useReducedMotionVariant } from '@/hooks/useReducedMotionVariants';
 
@@ -42,7 +42,11 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
 }) => {
    const { isRight } = useContext(PageTransitionContext);
 
-   const { getReducedVariant } = useReducedMotionVariant();
+   const { getReducedVariant, isMobile } = useReducedMotionVariant();
+
+   useEffect(() => {
+      console.log('isMobile: ', isMobile ? 'yes' : 'no');
+   }, [isMobile]);
 
    return (
       <motion.div

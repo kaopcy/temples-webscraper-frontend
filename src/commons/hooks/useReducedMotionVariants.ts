@@ -2,13 +2,13 @@ import { Variants } from 'framer-motion';
 import { useMedia } from 'react-use';
 
 export const useReducedMotionVariant = () => {
-   const isMobile = useMedia('(max-width: 480px)');
+   const isMobile = useMedia('(max-width: 768px)');
 
    const getReducedVariant = (variant: Variants): Variants => {
-      const a =Object.fromEntries(
-         Object.entries(variant).map((key, variant) => (isMobile ? [key, variant] : [key, {}] )),
-      )
-      return a ;
+      const a = Object.fromEntries(
+         Object.entries(variant).map((key, variant) => (isMobile ? [key, variant] : [key, {}])),
+      );
+      return a;
    };
-   return { getReducedVariant };
+   return { getReducedVariant, isMobile };
 };

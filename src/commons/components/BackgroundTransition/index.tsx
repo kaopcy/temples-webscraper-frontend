@@ -1,8 +1,8 @@
-import { ProvinceEnum } from '@/types/filter.type';
-import { provinceTranslator } from '@/utils/getTranslateProvince';
 import { Router } from 'next/router';
-import TemplesBackgroundText from './TemplesBackgroundText';
+
+import RegexExplainBackgroundText from './RegexExplainBackgroundText';
 import TempleBackgroundText from './TempleBackgroundText';
+import TemplesBackgroundText from './TemplesBackgroundText';
 
 const BackgroundTransition: React.FC<{ children: React.ReactNode; router: Router }> = ({
    children,
@@ -17,6 +17,9 @@ const BackgroundTransition: React.FC<{ children: React.ReactNode; router: Router
 
          case 'temple':
             return <TempleBackgroundText router={router} />;
+
+         case 'regex-explain':
+            return <RegexExplainBackgroundText router={router} />;
 
          default:
             return <TempleBackgroundText router={router} />;

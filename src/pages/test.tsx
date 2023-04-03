@@ -5,31 +5,16 @@ const Test: React.FC = () => {
    const [isOpen, setIsOpen] = useState(false);
    return (
       <div className="relative flex min-h-screen w-full flex-col items-center">
-         <AnimatePresence>
-            {!isOpen && (
-               <motion.div
-               initial={{
-                  clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-                }}
-                animate={{
-                  clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-                  transition: { duration: 0.7, staggerChildren: 0.2 },
-                }}
-                exit={{
-                  clipPath: 'polygon(0 0, 0% 0, 0% 100%, 0 100%)',
-                  transition: { duration: 0.7, staggerChildren: 0.2 },
-                }}
-                  className="absolute top-1/2 left-1/2 h-20 w-20 bg-red-500"
-               ></motion.div>
-            )}
-         </AnimatePresence>
-
-         <button
-            className="z-10 rounded-md bg-white p-10 text-lg font-bold hover:bg-red-200"
-            onClick={() => setIsOpen((e) => !e)}
-         >
-            click
-         </button>
+         <div className="fixed bottom-10 right-10 h-20 w-20 bg-red-500">
+            <div className="absolute  top-0 left-0 h-10 w-10 rounded-full bg-white">
+               <div
+                  className="fixed  inset-0 top-0 left-0 z-10 bg-blue-500"
+                  style={{
+                     clipPath: '10% 90% 10% 10% ',
+                  }}
+               ></div>
+            </div>
+         </div>
       </div>
    );
 };

@@ -9,13 +9,13 @@ import type { AppProps } from 'next/app';
 
 import BackgroundTransition from '@/components/BackgroundTransition';
 import { PageTransitionProvider } from '@/contexts/PageTransitionContext';
-import Toolbar from '@/components/Toolbar';
+import AllTemplesToolbar from '@/components/AllTempleToolbar';
 import { useEffect, useState } from 'react';
 
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 import '../styles/global.css';
-
+import Toolbar from '@/components/Toolbar';
 
 const LineSeedFont = localFont({
    src: [
@@ -54,7 +54,7 @@ export function App({ Component, ...rest }: AppProps) {
    const { pageProps, router } = props;
 
    useEffect(() => {
-      window.history.scrollRestoration = 'manual'
+      window.history.scrollRestoration = 'manual';
       const handleStart = (url: string) => {
          NProgress.start();
       };
@@ -88,7 +88,8 @@ export function App({ Component, ...rest }: AppProps) {
                   >
                      <Component key={router.asPath} {...pageProps} />
                   </AnimatePresence>
-                  <Toolbar />
+                  <AllTemplesToolbar />
+                  {/* <Toolbar /> */}
                </PageTransitionProvider>
             </BackgroundTransition>
          </main>

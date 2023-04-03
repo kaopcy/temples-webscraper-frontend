@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
 import { provinceTranslator } from '@/utils/getTranslateProvince';
 import { ProvinceEnum } from '@/types/filter.type';
+import { useMedia } from 'react-use';
 
 type IPopout = {
    hovering: boolean;
@@ -64,6 +65,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
    const { provinceFilter } = useProvinceFilter();
 
    const [hoveringLink, setHoveringLink] = useState(false);
+   const isMobile = useMedia('(max-width: 480px)', false);
 
    const {
       push,
@@ -84,11 +86,19 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
    };
 
    return (
-      <form
-         {...rest}
+      <motion.form
          onMouseDown={() => setHovering(true)}
          onSubmit={onSubmit}
          className={classname('relative z-10', rest.className ?? '')}
+         animate={
+            !isMobile && {
+               x: hovering ? '-100px' : '0px',
+               transition: {
+                  type: 'spring',
+                  stiffness: 80,
+               },
+            }
+         }
       >
          <AnimatePresence>
             {hovering && (
@@ -98,7 +108,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
                      initial="initial"
                      animate="animate"
                      exit="exit"
-                     className="absolute top-full left-0  z-[-1]  flex    w-full max-w-[400px] flex-col mt-4 tracking-wide  md:hidden"
+                     className="absolute top-full left-0  z-[-1]  mt-4    flex w-full max-w-[400px] flex-col tracking-wide  md:hidden"
                   >
                      <motion.button
                         type="submit"
@@ -150,9 +160,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
                               />
                            </motion.div>
                         )}
-                        <motion.div
-                           className="order-3 text-base font-bold text-text "
-                        >
+                        <motion.div className="order-3 text-base font-bold text-text ">
                            ค้นหา
                         </motion.div>
                      </motion.button>
@@ -240,7 +248,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
             )}
          </AnimatePresence>
          {children}
-      </form>
+      </motion.form>
    );
 };
 
