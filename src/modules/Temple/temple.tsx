@@ -65,7 +65,7 @@ const Temple: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> =
                   </>
                )}
                {temple && (
-                  <div className="h-[1500px] w-full overflow-hidden">
+                  <div className="h-[2000px] w-full overflow-hidden">
                      <ResponsiveMasonry
                         className="w-full gap-3"
                         columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}

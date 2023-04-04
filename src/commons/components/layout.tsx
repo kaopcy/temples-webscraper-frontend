@@ -26,13 +26,15 @@ const wrapperVariants: Variants = {
 
 const insideMotionVariants: Variants = {
    initial: (isRight: boolean) => ({
-      x: isRight ? '50vw' : '-50vw',
+      x:  '-50vw',
+      // x: isRight ? '50vw' : '-50vw',
    }),
    animate: (isRight: boolean) => ({
       x: 0,
    }),
    exit: (isRight: boolean) => ({
-      x: isRight ? '-40vw' : '50vw',
+      x:  '50vw',
+      // x: isRight ? '-40vw' : '50vw',
    }),
 };
 
