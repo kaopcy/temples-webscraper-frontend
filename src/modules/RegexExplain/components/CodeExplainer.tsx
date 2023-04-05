@@ -31,9 +31,9 @@ const CodeExplainer: React.FC = () => {
    const codeBlock = useCodeBlock()((state) => state.codeBlock);
    const prevDescription = useRef<CodeLine | null>(null);
    useUpdateEffect(() => {
-      if (selectedLine && codeBlock.getAllSameZoneLine(selectedLine)[0]?.getDescription()) {
-         prevDescription.current = codeBlock.getAllSameZoneLine(selectedLine)[0];
-      }
+      // if (selectedLine && codeBlock.getAllSameZoneLine(selectedLine)[0]?.getDescription()) {
+      //    prevDescription.current = codeBlock.getAllSameZoneLine(selectedLine)[0];
+      // }
    }, [selectedLine]);
 
    const currentSelectedDescription = selectedLine
@@ -45,9 +45,8 @@ const CodeExplainer: React.FC = () => {
       : prevDescription.current?.getZone();
 
    return (
-      <div className="flex w-full flex-col self-stretch ">
-         <div className=" h-full flex flex-col  w-full   bg-[#23272f] p-3 py-10 text-white ">
-
+      <div className="ml-4 flex w-full flex-col self-stretch">
+         <div className=" flex h-full w-full  flex-col   bg-[#181a1f] p-3 py-10 text-white ">
             <div className="relative  h-full w-full overflow-hidden ">
                <AnimatePresence mode="sync">
                   {selectedLine !== null && currentSelectedDescription && (
@@ -56,9 +55,10 @@ const CodeExplainer: React.FC = () => {
                         animate="animate"
                         initial="initial"
                         exit="exit"
-                        className=" md:absolute inset-0 flex h-full flex-col gap-y-10 md:overflow-y-auto"
+                        className=" inset-0 flex h-full flex-col gap-y-10 pr-4 md:absolute md:overflow-y-auto"
                         key={`${currentSelectedZone}`}
                      >
+                        <div className="">{codeBlock.getCodeSameZoneLine(selectedLine)}</div>
                         <div className="">{currentSelectedDescription.detail}</div>
                         <div className="rounded-md bg-[#ffffff11] px-4 py-2">
                            "{currentSelectedDescription.input}""

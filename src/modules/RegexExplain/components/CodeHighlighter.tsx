@@ -1,6 +1,8 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 import { useCodeBlock } from '../hooks/useCodeBlock';
+import { useEffect } from 'react';
+import { useUpdateEffect } from 'react-use';
 
 const HighlighterContainer: React.FC = () => {
    const setSelectedLine = useCodeBlock()((state) => state.setSelectedLine);
@@ -26,19 +28,19 @@ const HighlighterContainer: React.FC = () => {
    };
 
    return (
-      <section className="my-auto max-h-[500px] w-full max-w-[700px] overflow-hidden  rounded-md">
+      <section className="my-auto max-h-[500px] w-full max-w-[700px] overflow-hidden  rounded-md border border-text">
          <div className="flex h-10 w-full items-center bg-[#23272f] p-5 text-white ">
             {codeBlock.getName()}
          </div>
 
-         <div className="w-full  border-text-light ">
+         <div className="w-full h-full  border-text-light overflow-hidden">
             <SyntaxHighlighter
                language="python"
                showLineNumbers
                wrapLines
                PreTag={'div'}
                codeTagProps={{
-                  className: 'flex flex-col max-h-[420px] w-full',
+                  className: 'flex flex-col max-h-[420px] w-full  overflow-hidden',
                }}
                lineNumberStyle={{
                   width: '42px',

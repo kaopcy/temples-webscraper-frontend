@@ -1,4 +1,4 @@
-import { Description } from './DescriptionBuilder'
+import { Description } from './DescriptionBuilder';
 
 export class CodeLine {
    private line: string = '';
@@ -40,6 +40,7 @@ export class CodeBlockBuilder {
     */
    private code: CodeLine[] = [new CodeLine('', 'z-0')];
    private name: string = '';
+   private description: string = '';
 
    constructor(name: string) {
       this.name = name;
@@ -59,12 +60,21 @@ export class CodeBlockBuilder {
       return this.addLine('');
    }
 
+   addDescription(description: string) {
+      this.description = description;
+      return this;
+   }
+
    getLine(lineNum: number) {
       return this.code[lineNum];
    }
 
    getName() {
       return this.name;
+   }
+
+   getDescription() {
+      return this.description;
    }
 
    getCode() {
@@ -76,5 +86,9 @@ export class CodeBlockBuilder {
 
    getAllSameZoneLine(lineNum: number) {
       return this.code.filter((e) => e.getZone() === this.getLine(lineNum).getZone());
+   }
+
+   getCodeSameZoneLine(lineNum: number): string {
+      return this.getAllSameZoneLine(lineNum).reduce((acc, cur) => `${acc}\n${cur.getLine()}`, '');
    }
 }

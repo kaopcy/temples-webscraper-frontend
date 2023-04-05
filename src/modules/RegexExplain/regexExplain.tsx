@@ -9,8 +9,11 @@ import { CodeBlockStore } from './contexts/CodeBlockStore';
 const RegexExplain: React.FC = () => {
    return (
       <Layout pageKey="regex-explain">
-         <div className=" min-h-screen w-full bg-[#181a1f] py-20">
-            <div className="mx-auto flex max-w-[1000px] flex-col gap-y-10">
+         <div className=" flex min-h-screen w-full flex-col items-center bg-[#181a1f] py-32">
+            <h1 className="mb-20 text-5xl font-bold text-white">
+               อธิบาย Regular expression ที่ใช้
+            </h1>
+            <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-y-10">
                <CodeBlockStore codeBlock={codeBlock1}>
                   <CodePlain />
                </CodeBlockStore>

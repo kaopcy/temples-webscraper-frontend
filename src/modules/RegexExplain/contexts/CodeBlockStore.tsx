@@ -18,7 +18,7 @@ export const CodeBlockStore: React.FC<{
    const [useStore] = useState(() =>
       create<IStore>((set,get) => ({
          codeBlock,
-         selectedLine: null,
+         selectedLine: 1,
          setSelectedLine: (lineNumber) => set((state) => ({ ...state, selectedLine: lineNumber })),
          getSelectedCodeLine: ()=> {
             const selectedLine = get().selectedLine
