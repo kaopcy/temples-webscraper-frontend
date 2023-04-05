@@ -1,7 +1,9 @@
+import HTMLParser, { HTMLReactParserOptions, Element } from 'html-react-parser';
+
 import { useUpdateEffect } from 'react-use';
 import { useCodeBlock } from '../hooks/useCodeBlock';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Description } from '../utils/DescriptionBuilder';
 import { CodeLine } from '../utils/CodeBlockBuilder';
 
@@ -26,15 +28,29 @@ const variants: Variants = {
    },
 };
 
+
 const CodeExplainer: React.FC = () => {
    const selectedLine = useCodeBlock()((state) => state.selectedLine);
+   const selectedDataZone = useCodeBlock()((state) => state.selectedDataZone);
    const codeBlock = useCodeBlock()((state) => state.codeBlock);
    const prevDescription = useRef<CodeLine | null>(null);
-   useUpdateEffect(() => {
-      // if (selectedLine && codeBlock.getAllSameZoneLine(selectedLine)[0]?.getDescription()) {
-      //    prevDescription.current = codeBlock.getAllSameZoneLine(selectedLine)[0];
-      // }
-   }, [selectedLine]);
+   useEffect(() => {
+      const matches = document.querySelectorAll(
+         `span[data-zone='${selectedDataZone}']`,
+      ) as NodeListOf<HTMLElement>;
+      matches.forEach((node) => {
+         node.style.backgroundColor = '#ffef4015';
+      });
+
+      return () => {
+         const matches = document.querySelectorAll(
+            `span[data-zone='${selectedDataZone}']`,
+         ) as NodeListOf<HTMLElement>;
+         matches.forEach((node) => {
+            node.style.backgroundColor = 'transparent';
+         });
+      };
+   }, [selectedDataZone]);
 
    const currentSelectedDescription = selectedLine
       ? codeBlock.getAllSameZoneLine(selectedLine)[0]?.getDescription()
@@ -46,24 +62,26 @@ const CodeExplainer: React.FC = () => {
 
    return (
       <div className="ml-4 flex w-full flex-col self-stretch">
-         <div className=" flex h-full w-full  flex-col   bg-[#181a1f] p-3 py-10 text-white ">
+         <div className=" flex h-full w-full  flex-col   bg-[#181a1f]  text-white ">
             <div className="relative  h-full w-full overflow-hidden ">
-               <AnimatePresence mode="sync">
+               <AnimatePresence initial={false} mode="sync">
                   {selectedLine !== null && currentSelectedDescription && (
                      <motion.div
                         variants={variants}
                         animate="animate"
                         initial="initial"
                         exit="exit"
-                        className=" inset-0 flex h-full flex-col gap-y-10 pr-4 md:absolute md:overflow-y-auto"
+                        className=" inset-0 flex h-full flex-col gap-y-10 py-2 pr-4 md:absolute md:overflow-y-auto"
                         key={`${currentSelectedZone}`}
                      >
                         <div className="">{codeBlock.getCodeSameZoneLine(selectedLine)}</div>
-                        <div className="">{currentSelectedDescription.detail}</div>
+                        <div className="">
+                           {HTMLParser(currentSelectedDescription.detail, options)}
+                        </div>
                         <div className="rounded-md bg-[#ffffff11] px-4 py-2">
                            "{currentSelectedDescription.input}""
                         </div>
-                        <div className="">{currentSelectedDescription.output}</div>
+                        <div className="">{HTMLParser(currentSelectedDescription.output)} </div>
                      </motion.div>
                   )}
                </AnimatePresence>
@@ -71,6 +89,19 @@ const CodeExplainer: React.FC = () => {
          </div>
       </div>
    );
+};
+
+const options: HTMLReactParserOptions = {
+   replace: (domNode) => {
+      console.log(domNode instanceof Element);
+      if (domNode instanceof Element && domNode.attribs) {
+         if (domNode.type !== 'tag' || domNode.name !== 'p') {
+            console.log('first');
+            return domNode.children;
+         }
+         console.log('first');
+      }
+   },
 };
 
 export default CodeExplainer;

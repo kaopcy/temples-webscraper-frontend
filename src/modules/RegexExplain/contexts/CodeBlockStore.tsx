@@ -5,26 +5,33 @@ import { CodeBlockBuilder, CodeLine } from '../utils/CodeBlockBuilder';
 export interface IStore {
    codeBlock: CodeBlockBuilder;
    selectedLine: number | null;
+   selectedDataZone: string | null;
    setSelectedLine: (lineNumber: number) => void;
-   getSelectedCodeLine: ()=> CodeLine | null
+   setSelectedZone: (newZone: string) => void;
+   getSelectedCodeLine: () => CodeLine | null;
 }
 
-export const CodeBlockStoreContext = createContext<UseBoundStore<StoreApi<IStore>> | undefined>(undefined);
+export const CodeBlockStoreContext = createContext<UseBoundStore<StoreApi<IStore>> | undefined>(
+   undefined,
+);
 
 export const CodeBlockStore: React.FC<{
    children: React.ReactNode;
    codeBlock: CodeBlockBuilder;
 }> = ({ children, codeBlock }) => {
    const [useStore] = useState(() =>
-      create<IStore>((set,get) => ({
+      create<IStore>((set, get) => ({
          codeBlock,
          selectedLine: 1,
+         selectedDataZone: `${codeBlock.getName()}-${codeBlock.getLine(1).getZone()}`,
          setSelectedLine: (lineNumber) => set((state) => ({ ...state, selectedLine: lineNumber })),
-         getSelectedCodeLine: ()=> {
-            const selectedLine = get().selectedLine
-            if(selectedLine) return get().codeBlock.getLine(selectedLine)
-            return null
-         }
+         setSelectedZone: (newZone: string) =>
+            set((state) => ({ ...state, selectedDataZone: newZone })),
+         getSelectedCodeLine: () => {
+            const selectedLine = get().selectedLine;
+            if (selectedLine) return get().codeBlock.getLine(selectedLine);
+            return null;
+         },
       })),
    );
 
