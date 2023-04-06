@@ -11,8 +11,8 @@ services:
       dockerfile: Dockerfile.production
     ports:
       - "4000:3000"
-    networks:
-      - app-tier
+    # networks:
+    #   - app-tier
 
     # because my data doesn't change that often and i just want to playing with redis  
     # so i decided to use redis for caching getServersideprops api response 
