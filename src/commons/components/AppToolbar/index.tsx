@@ -1,28 +1,38 @@
+import { useRouter } from 'next/router';
+import { useRef } from 'react';
+
 import { HTMLMotionProps, Variants, motion } from 'framer-motion';
 
 import { Icon } from '@iconify/react';
-import AllTemplesPopup, { IHandler } from '../AllTemplesPopup';
-import { useRef } from 'react';
-import { useRouter } from 'next/router';
+
+import AllTemplesPopup from '../AllTemplesPopup';
+import CsvPopup from '../CsvPopup';
+
+import { IModalHandler } from '@/components/ModalLayout';
 
 const AppToolbar = () => {
-   const allTemplePopupRef = useRef<IHandler>(null);
+   const allTemplePopupRef = useRef<IModalHandler>(null);
+   const csvPopupRef = useRef<IModalHandler>(null);
+
    const { push } = useRouter();
 
    const onAllTemplesClick = () => {
       allTemplePopupRef.current?.toggle();
+      csvPopupRef.current?.close();
    };
    const onRegexClick = () => {
       push('/regex-explain', '/regex-explain', { scroll: false });
    };
    const onCsvClick = () => {
-      push('/regex-explain', '/regex-explain', { scroll: false });
+      csvPopupRef.current?.toggle();
+      allTemplePopupRef.current?.close();
    };
 
    return (
       <>
          <AllTemplesPopup ref={allTemplePopupRef} />
-         <div className="fixed bottom-10 right-20 flex flex-col-reverse items-center gap-y-5">
+         <CsvPopup ref={csvPopupRef} />
+         <div className="fixed md:bottom-10 top-10 right-[5%] flex  items-center gap-3 md:gap-5 flex-col-reverse">
             <IconButton
                icon="fluent:text-bullet-list-square-24-regular"
                description="รายชื่อวัดทั้งหมด"
