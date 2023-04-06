@@ -7,6 +7,7 @@ import { useSearchBar } from '@/modules/Temples/hooks/useSearchBar';
 export interface IDropdownImperative {
    close: () => void;
    open: () => void;
+   toggle: () => void;
 }
 
 const SearchBarDropdown = forwardRef<IDropdownImperative>((_, dropDownRef) => {
@@ -21,6 +22,9 @@ const SearchBarDropdown = forwardRef<IDropdownImperative>((_, dropDownRef) => {
          open: () => {
             setOpen(true);
          },
+         toggle: ()=> {
+            setOpen(e => !e);
+         }
       }),
    );
 

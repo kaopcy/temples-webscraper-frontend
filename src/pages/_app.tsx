@@ -16,6 +16,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/global.css';
 import Toolbar from '@/components/Toolbar';
+import AppToolbar from '@/components/AppToolbar';
 
 const LineSeedFont = localFont({
    src: [
@@ -88,7 +89,8 @@ export function App({ Component, ...rest }: AppProps) {
                   >
                      <Component key={router.asPath} {...pageProps} />
                   </AnimatePresence>
-                  <AllTemplesToolbar />
+                  <AppToolbar />
+                  {/* <AllTemplesToolbar /> */}
                   {/* <Toolbar /> */}
                </PageTransitionProvider>
             </BackgroundTransition>
