@@ -1,5 +1,9 @@
 version: '3'
 
+# networks:
+#   app-tier:
+#     driver: bridge
+
 services:
   app:
     build: 
@@ -7,4 +11,24 @@ services:
       dockerfile: Dockerfile.production
     ports:
       - "4000:3000"
-    
+    networks:
+      - app-tier
+
+    # because my data doesn't change that often and i just want to playing with redis  
+    # so i decided to use redis for caching getServersideprops api response 
+
+  # redis:
+  #   image: docker.io/bitnami/redis:7.0
+  #   environment:
+  #     - ALLOW_EMPTY_PASSWORD=yes
+  #     - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+  #   ports:
+  #     - '6379:6379'
+  #   volumes:
+  #     - 'redis_data:/bitnami/redis/data'
+  #   networks:
+  #     - app-tier
+
+# volumes:
+#   redis_data:
+#     driver: local

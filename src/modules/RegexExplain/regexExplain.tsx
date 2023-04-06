@@ -13,7 +13,7 @@ const RegexExplain: React.FC = () => {
             <h1 className="mb-20 text-5xl font-bold text-white">
                อธิบาย Regular expression ที่ใช้
             </h1>
-            <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-y-10">
+            <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-y-10">
                <CodeBlockStore codeBlock={codeBlock1}>
                   <CodePlain />
                </CodeBlockStore>

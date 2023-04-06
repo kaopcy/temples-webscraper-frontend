@@ -34,7 +34,7 @@ const HighlighterContainer: React.FC = () => {
 
    return (
       <section className="my-auto  w-full max-w-[700px] overflow-hidden  rounded-md border border-text">
-         <div className="flex h-10 w-full items-center bg-[#23272f] p-5 text-white ">
+         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 text-white ">
             {codeBlock.getName()}
          </div>
 
@@ -46,7 +46,7 @@ const HighlighterContainer: React.FC = () => {
                PreTag={'div'}
                customStyle={{ padding: '10px 17px 10px 0px', boxSizing: 'content-box', width: '100%' }}
                codeTagProps={{
-                  className: 'flex flex-col  w-full  overflow-hidden min-h-[300px]',
+                  className: 'flex flex-col  w-full  overflow-hidden min-h-[350px]',
                }}
                lineNumberStyle={{
                   width: '42px',
