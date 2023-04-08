@@ -25,7 +25,7 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
       <Layout pageKey={page}>
          <div className="flex h-full w-full flex-col items-center px-3 pt-20 md:px-0">
             <motion.div
-               className="pointer-events-none fixed inset-0 h-full w-full bg-black"
+               className="pointer-events-none fixed  inset-0 h-full w-full bg-black"
                initial={{ opacity: 0, zIndex: 2 }}
                animate={{ opacity: hovering ? 0.8 : 0, pointerEvents: hovering ? 'auto' : 'none' }}
                transition={{ duration: 0.15 }}

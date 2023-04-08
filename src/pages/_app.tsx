@@ -1,22 +1,20 @@
 import localFont from 'next/font/local';
-
+import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-
 import { wrapper } from '@/redux/store';
+
+import { useRouterChange } from '@/hooks/useRouterChange';
 
 import { AnimatePresence } from 'framer-motion';
 import type { AppProps } from 'next/app';
 
 import BackgroundTransition from '@/components/BackgroundTransition';
+import AppToolbar from '@/components/AppToolbar';
 import { PageTransitionProvider } from '@/contexts/PageTransitionContext';
-import AllTemplesToolbar from '@/components/AllTempleToolbar';
-import { useEffect, useState } from 'react';
 
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import '../styles/global.css';
-import Toolbar from '@/components/Toolbar';
-import AppToolbar from '@/components/AppToolbar';
 
 const LineSeedFont = localFont({
    src: [
@@ -54,26 +52,15 @@ export function App({ Component, ...rest }: AppProps) {
    const { store, props } = wrapper.useWrappedStore(rest);
    const { pageProps, router } = props;
 
-   useEffect(() => {
-      window.history.scrollRestoration = 'manual';
-      const handleStart = (url: string) => {
+   useRouterChange({
+      handleStart: () => {
          NProgress.start();
-      };
-
-      const handleStop = () => {
+      },
+      handleStop: () => {
          NProgress.done();
-      };
+      },
+   });
 
-      router.events.on('routeChangeStart', handleStart);
-      router.events.on('routeChangeComplete', handleStop);
-      router.events.on('routeChangeError', handleStop);
-
-      return () => {
-         router.events.off('routeChangeStart', handleStart);
-         router.events.off('routeChangeComplete', handleStop);
-         router.events.off('routeChangeError', handleStop);
-      };
-   }, [router]);
    return (
       <Provider store={store}>
          <main style={LineSeedFont.style}>
