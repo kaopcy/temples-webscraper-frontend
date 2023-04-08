@@ -14,7 +14,7 @@ const wrapperVariants: Variants = {
       clipPath: isRight
          ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
          : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      transition: { duration: 0.7, staggerChildren: 0.2 },
+      transition: { duration: 0.7 },
    }),
    exit: (isRight: number) => ({
       clipPath: isRight
@@ -26,14 +26,14 @@ const wrapperVariants: Variants = {
 
 const insideMotionVariants: Variants = {
    initial: (isRight: boolean) => ({
-      x:  '-50vw',
+      x: '-50vw',
       // x: isRight ? '50vw' : '-50vw',
    }),
    animate: (isRight: boolean) => ({
       x: 0,
    }),
    exit: (isRight: boolean) => ({
-      x:  '50vw',
+      x: '50vw',
       // x: isRight ? '-40vw' : '50vw',
    }),
 };

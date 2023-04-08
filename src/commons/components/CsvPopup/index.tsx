@@ -46,7 +46,7 @@ const CsvPopup = forwardRef<IModalHandler>((_, ref) => {
             </div>
             <div className="flex flex-col gap-y-4 py-4 px-10">
                {Object.keys(ProvinceEnum).map((province) => (
-                  <button className="flex items-center gap-x-3">
+                  <button key={province} className="flex items-center gap-x-3">
                      <div className="h-3 w-3 border-2"></div>
                      <div className="">{provinceTranslator(province as ProvinceEnum)}</div>
                   </button>
