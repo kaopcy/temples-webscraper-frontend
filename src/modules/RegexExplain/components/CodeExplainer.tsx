@@ -6,6 +6,9 @@ import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { Description } from '../utils/DescriptionBuilder';
 import { CodeLine } from '../utils/CodeBlockBuilder';
+import { Icon } from '@iconify/react';
+import CodePopup from './CodePopup';
+import { IModalHandler } from '@/components/ModalLayout';
 
 const variants: Variants = {
    initial: {
@@ -29,10 +32,17 @@ const variants: Variants = {
 };
 
 const CodeExplainer: React.FC = () => {
-   const selectedLine = useCodeBlock()((state) => state.selectedLine);
    const selectedDataZone = useCodeBlock()((state) => state.selectedDataZone);
+   const selectedLine = useCodeBlock()((state) => state.selectedLine);
    const codeBlock = useCodeBlock()((state) => state.codeBlock);
    const prevDescription = useRef<CodeLine | null>(null);
+
+   const codePopupRef = useRef<IModalHandler>(null);
+
+   const onExampleClick = () => {
+      codePopupRef.current?.toggle();
+   };
+
    useEffect(() => {
       const matches = document.querySelectorAll(
          `span[data-zone='${selectedDataZone}']`,
@@ -60,33 +70,40 @@ const CodeExplainer: React.FC = () => {
       : prevDescription.current?.getZone();
 
    return (
-      <div className=" flex w-full flex-col self-stretch pt-10">
-         <div className=" flex h-full w-full  flex-col  border border-l-0 border-[#383838] bg-[#181a1f]  text-white ">
-            <div className="relative  h-full w-full overflow-hidden ">
-               <AnimatePresence initial={false} mode="sync">
-                  {selectedLine !== null && currentSelectedDescription && (
-                     <motion.div
-                        variants={variants}
-                        animate="animate"
-                        initial="initial"
-                        exit="exit"
-                        className=" inset-0 flex h-full flex-col gap-y-10 py-4 px-4 md:absolute md:overflow-y-auto"
-                        key={`${currentSelectedZone}`}
-                     >
-                        <div className="">{codeBlock.getCodeSameZoneLine(selectedLine)}</div>
-                        <div className="">
-                           {HTMLParser(currentSelectedDescription.detail, options)}
-                        </div>
-                        <div className="rounded-md bg-[#ffffff11] px-4 py-2">
+      <>
+         <div className=" flex w-full flex-col self-stretch pt-10">
+            <div className=" flex h-full w-full  flex-col  border md:border-l-0 border-[#383838] bg-[#181a1f]  text-white ">
+               <div className="relative  h-full w-full overflow-hidden ">
+                  <AnimatePresence initial={false} mode="sync">
+                     {selectedLine !== null && currentSelectedDescription && (
+                        <motion.div
+                           variants={variants}
+                           animate="animate"
+                           initial="initial"
+                           exit="exit"
+                           className="inset-0 flex h-full flex-col gap-y-10 py-8 px-4 md:absolute md:overflow-y-auto"
+                           key={`${currentSelectedZone}`}
+                        >
+                           <div className="">{currentSelectedDescription.detail}</div>
+                           <button
+                              onClick={onExampleClick}
+                              className="mt-auto flex items-center  gap-x-2 self-end rounded-md border border-text-light px-4 py-2 text-white hover:bg-black"
+                           >
+                              <Icon className=" " icon="material-symbols:play-circle-outline" />
+                              <div className="">ตัวอย่าง</div>
+                           </button>
+                           {/* <div className="rounded-md bg-[#ffffff11] px-4 py-2">
                            "{currentSelectedDescription.input}""
-                        </div>
-                        <div className="">{HTMLParser(currentSelectedDescription.output)} </div>
-                     </motion.div>
-                  )}
-               </AnimatePresence>
+                           </div>
+                        <div className="">{HTMLParser(currentSelectedDescription.output)} </div> */}
+                        </motion.div>
+                     )}
+                  </AnimatePresence>
+               </div>
             </div>
          </div>
-      </div>
+         <CodePopup ref={codePopupRef} />
+      </>
    );
 };
 

@@ -11,10 +11,10 @@ const CodePlain: React.FC = () => {
             <CodeHighlighter />
             <CodeExplainer />
          </div>
-         <div className="flex items-start w-full">
+         {/* <div className="flex items-start w-full">
             <CodeInputPlain />
             <CodeInputPlain />
-         </div>
+         </div> */}
       </div>
    );
 };

@@ -1,5 +1,6 @@
 import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { useState, useImperativeHandle, forwardRef } from 'react';
+import { useState, useImperativeHandle, forwardRef, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 export interface IModalHandler {
    open: () => void;
@@ -60,23 +61,34 @@ const ModalLayout = forwardRef<IModalHandler, { children: React.ReactNode }>(
          });
       };
 
-      return (
-         <AnimatePresence mode="wait">
-            {isOpen && (
-               <>
-                  <motion.div
-                     onClick={close}
-                     variants={OverlayVariant}
-                     animate="animate"
-                     initial="initial"
-                     exit="exit"
-                     className="fixed inset-0 z-0 bg-[#00000099]"
-                  />
-                  {children}
-               </>
-            )}
-         </AnimatePresence>
-      );
+      const portalRef = useRef<Element | null>(null);
+      const [mounted, setMounted] = useState(false);
+
+      useEffect(() => {
+         portalRef.current = document.querySelector<HTMLElement>('#portal');
+         setMounted(true);
+      }, []);
+
+      return mounted && portalRef.current
+         ? createPortal(
+              <AnimatePresence mode="wait">
+                 {isOpen && (
+                    <>
+                       <motion.div
+                          onClick={close}
+                          variants={OverlayVariant}
+                          animate="animate"
+                          initial="initial"
+                          exit="exit"
+                          className="fixed inset-0 z-0 bg-[#00000099]"
+                       ></motion.div>
+                       {children}
+                    </>
+                 )}
+              </AnimatePresence>,
+              portalRef.current,
+           )
+         : null;
    },
 );
 

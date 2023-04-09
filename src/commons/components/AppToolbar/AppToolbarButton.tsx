@@ -13,7 +13,24 @@ const ButtonVariants: Variants = {
 };
 
 const IconVariants: Variants = {
-   hover: {
+   initial: {
+      x: 20,
+      transition: {
+         duration: 0.4,
+         type: 'tween',
+         ease: 'easeOut',
+      },
+   },
+   animate: {
+      x: 0,
+      transition: {
+         duration: 0.4,
+         type: 'tween',
+         ease: 'easeOut',
+      },
+   },
+   exit: {
+      x: -20,
       transition: {
          duration: 0.4,
          type: 'tween',
@@ -68,7 +85,7 @@ const AppToolbarButton: React.FC<HTMLMotionProps<'button'> & IIconButtonProps> =
          animate="rest"
          className={classname(
             'relative z-10 flex h-10 w-10   cursor-pointer items-center rounded-full border-2  md:h-14 md:w-14',
-            active ? 'border-white' : 'border-text',
+            active ? 'border-text' : 'border-text',
          )}
          {...rest}
       >
@@ -88,7 +105,7 @@ const AppToolbarButton: React.FC<HTMLMotionProps<'button'> & IIconButtonProps> =
 
          <motion.div
             variants={DescriptionVariants}
-            className="absolute right-[130%] z-0 whitespace-nowrap rounded-full bg-text py-0.5 px-4 text-sm text-white"
+            className="absolute pointer-events-none right-[130%] z-0 whitespace-nowrap rounded-full bg-text py-0.5 px-4 text-sm text-white"
          >
             {description}
          </motion.div>

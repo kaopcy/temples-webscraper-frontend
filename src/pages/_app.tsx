@@ -81,6 +81,7 @@ export function App({ Component, ...rest }: AppProps) {
                   {/* <Toolbar /> */}
                </PageTransitionProvider>
             </BackgroundTransition>
+            <div id="portal"></div>
          </main>
       </Provider>
    );

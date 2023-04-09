@@ -65,7 +65,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
    const { provinceFilter } = useProvinceFilter();
 
    const [hoveringLink, setHoveringLink] = useState(false);
-   const isMobile = useMedia('(max-width: 480px)', false);
+   const isMobile = useMedia('(max-width: 768px)', false);
 
    const {
       push,
@@ -89,15 +89,29 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
       <motion.form
          onMouseDown={() => setHovering(true)}
          onSubmit={onSubmit}
-         className={classname('relative z-10', rest.className ?? '')}
+         className={classname('relative z-10 rounded-lg   bg-white  pt-10  ', rest.className ?? '')}
          animate={
-            !isMobile && {
-               x: hovering ? '-100px' : '0px',
-               transition: {
-                  type: 'spring',
-                  stiffness: 80,
-               },
-            }
+            !isMobile
+               ? {
+                    paddingLeft: '40px',
+                    paddingRight: '40px',
+                    x: hovering ? '-100px' : '0px',
+                    transition: {
+                       type: 'spring',
+                       stiffness: 80,
+                    },
+                 }
+               : {
+                    ...(hovering
+                       ? {
+                            paddingLeft: '20px',
+                            paddingRight: '20px',
+                         }
+                       : {
+                            paddingLeft: '8px',
+                            paddingRight: '8px',
+                         }),
+                 }
          }
       >
          <AnimatePresence>
@@ -108,7 +122,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
                      initial="initial"
                      animate="animate"
                      exit="exit"
-                     className="absolute top-full left-0  z-[-1]  mt-4     flex w-full max-w-[400px] flex-col tracking-wide  md:hidden"
+                     className="absolute top-full left-0  z-[-1]  mt-4      flex w-full max-w-[400px] flex-col tracking-wide  md:hidden"
                   >
                      <motion.button
                         type="submit"
@@ -170,7 +184,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
                      initial="initial"
                      animate="animate"
                      exit="exit"
-                     className="absolute top-full  left-0  z-[-1] hidden h-full  w-full max-w-[400px] flex-col pl-5 tracking-wide md:top-0 md:left-[100%] md:flex"
+                     className="absolute top-full  left-0  z-[-1] hidden h-full  w-full max-w-[300px] flex-col pl-5 tracking-wide md:top-0 md:left-[100%] md:flex lg:max-w-[400px]"
                   >
                      <motion.div
                         variants={variants}
@@ -178,13 +192,15 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
                      >
                         ค้นหาชื่อวัด
                      </motion.div>
-                     <motion.div
-                        variants={variants}
-                        className="mt-3 whitespace-nowrap text-lg text-white  md:text-lg"
-                     >
-                        คีย์เวิร์ด "{searchQuery}"
-                     </motion.div>
-                     <motion.div variants={variants} className=" text-lg text-white md:text-lg">
+                     {searchQuery.length > 0 && (
+                        <motion.div
+                           variants={variants}
+                           className="mt-3 whitespace-nowrap text-lg text-white  md:text-lg"
+                        >
+                           คีย์เวิร์ด "{searchQuery}"
+                        </motion.div>
+                     )}
+                     <motion.div variants={variants} className=" text-lg text-white md:text-lg ">
                         จังหวัด{filterQuery}
                      </motion.div>
                      <motion.button

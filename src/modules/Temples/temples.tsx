@@ -51,7 +51,7 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
                </h1>
             </motion.div>
             <Popout
-               className="rounded-lg  bg-white px-2 pt-10  sm:px-10 md:px-10"
+               className=""
                hovering={hovering}
                setHovering={setHovering}
             >

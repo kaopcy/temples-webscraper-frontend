@@ -1,5 +1,5 @@
 export class Description {
-   detail: string = '';
+   detail: string | JSX.Element = '';
    input: string = '';
    output: string = '';
    constructor() {
@@ -14,7 +14,7 @@ export class Description {
       this.output = output;
       return this;
    }
-   addDetail(detail: string) {
+   addDetail(detail: string | JSX.Element) {
       this.detail = detail;
       return this;
    }

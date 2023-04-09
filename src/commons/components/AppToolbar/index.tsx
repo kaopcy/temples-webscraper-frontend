@@ -14,7 +14,7 @@ const AppToolbar = () => {
    const { push, pathname } = useRouter();
 
    const onHomeClick = () => {
-      push('/temples/1')
+      push('/temples/1', '/temples/1', { scroll: false })
    };
 
    const isHomeActive = pathname === '/temples/[page]'
@@ -35,7 +35,7 @@ const AppToolbar = () => {
 
    return (
       <>
-         <div className="fixed top-10 z-0 right-[5%] flex flex-col-reverse  items-center gap-3 md:bottom-10 md:gap-5">
+         <div className="fixed  z-0  md:right-[3%] lg:right-[5%] flex flex-col-reverse  items-center gap-3 md:bottom-10 md:gap-5">
             <AppToolbarButton
                active={isHomeActive}
                icon={isHomeActive ? "mdi:home-sound-out" : "mdi:home-outline"}
