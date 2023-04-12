@@ -18,9 +18,9 @@ codeBlock
          .addOutput("<main id='main1'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
 
-   .addSibbling(codeBlock.addLine("result = re.sub('<li>.*? (ไม่มีหน้า)\">', '<li>', result)"))
-   .addSibbling(codeBlock.addLine("result = re.sub(' ตำบล.*', '</li>', result)"))
-   .addSibbling(codeBlock.addSpace());
+   .addSibling(codeBlock.addLine("result = re.sub('<li>.*? (ไม่มีหน้า)\">', '<li>', result)"))
+   .addSibling(codeBlock.addLine("result = re.sub(' ตำบล.*', '</li>', result)"))
+   .addSibling(codeBlock.addSpace());
 
 codeBlock
    .addLine("result = re.sub('<li><a href=\"', '<li>', result)")
@@ -34,6 +34,6 @@ codeBlock
          )
          .addOutput("<main id='main1'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
-   .addSibbling(codeBlock.addLine("result = re.sub('\" c', '<\"c', result)"))
-   .addSibbling(codeBlock.addLine("result = re.sub('\"class=\".*\"', '', result)"))
-   .addSibbling(codeBlock.addLine("result = re.sub('\"( )?t', ' <\"t', result)"));
+   .addSibling(codeBlock.addLine("result = re.sub('\" c', '<\"c', result)"))
+   .addSibling(codeBlock.addLine("result = re.sub('\"class=\".*\"', '', result)"))
+   .addSibling(codeBlock.addLine("result = re.sub('\"( )?t', ' <\"t', result)"));

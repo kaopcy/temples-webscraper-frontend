@@ -21,8 +21,8 @@ codeBlock
          )
          .addOutput("<main id='main1'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
-   .addSibbling(codeBlock.addLine('result = re.findall(pattern, data.text)'))
-   .addSibbling(codeBlock.addLine("pattern = re.compile('<li>.*</li>')"));
+   .addSibling(codeBlock.addLine('result = re.findall(pattern, data.text)'))
+   .addSibling(codeBlock.addLine("pattern = re.compile('<li>.*</li>')"));
 
 codeBlock.addSpace();
 
@@ -38,11 +38,11 @@ codeBlock
          )
          .addOutput("<main id='main1'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
-   .addSibbling(
+   .addSibling(
       codeBlock.addLine("result = re.sub(' <a href=\".*ตำบล.*/a>', ' ตำบล', '\\n'.join(result))"),
    )
-   .addSibbling(codeBlock.addLine("result = re.sub('<li>.*? (ไม่มีหน้า)\">', '<li>', result)"))
-   .addSibbling(codeBlock.addLine("result = re.sub(' ตำบล.*', '</li>', result)"));
+   .addSibling(codeBlock.addLine("result = re.sub('<li>.*? (ไม่มีหน้า)\">', '<li>', result)"))
+   .addSibling(codeBlock.addLine("result = re.sub(' ตำบล.*', '</li>', result)"));
 
 codeBlock.addSpace();
 

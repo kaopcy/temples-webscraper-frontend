@@ -34,7 +34,7 @@ const HighlighterContainer: React.FC = () => {
 
    return (
       <section className="my-auto  w-full max-w-[700px] overflow-hidden  rounded-md border border-text">
-         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 text-white ">
+         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 text-white font-primary">
             {codeBlock.getName()}
          </div>
 

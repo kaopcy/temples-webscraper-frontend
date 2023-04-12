@@ -8,16 +8,25 @@ const wrapperVariants: Variants = {
       clipPath: isRight
          ? 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)'
          : 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
+      WebkitClipPath: isRight
+         ? 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)'
+         : 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
       transition: { duration: 0.7 },
    }),
    animate: (isRight: number) => ({
       clipPath: isRight
          ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
          : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      WebkitClipPath: isRight
+         ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
+         : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
       transition: { duration: 0.7 },
    }),
    exit: (isRight: number) => ({
       clipPath: isRight
+         ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
+         : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+      WebkitClipPath: isRight
          ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
          : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
       transition: { duration: 0.7 },

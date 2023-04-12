@@ -27,7 +27,7 @@ const BackgroundTransition: React.FC<{ children: React.ReactNode; router: Router
    };
 
    return (
-      <div className=" relative min-h-screen  overflow-x-hidden bg-text  ">
+      <div className=" relative min-h-screen  overflow-x-hidden bg-neutral-600  ">
          <div className="fixed  flex h-full w-screen flex-col items-center justify-center ">
             {renderText()}
          </div>

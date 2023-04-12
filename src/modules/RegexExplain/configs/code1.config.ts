@@ -16,7 +16,11 @@ codeBlock
          )
          .addOutput("<main id='main1' className='bg-red-500'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
-   .addSibbling(codeBlock.addSpace());
+   .addSibling(codeBlock.addLine('data = await fetch(url)'))
+   .addSibling(codeBlock.addLine('data = await fetch(url)'))
+   .addSibling(codeBlock.addLine('data = await fetch(url)'))
+   .addSibling(codeBlock.addLine('data = await fetch(url)'))
+   .addSibling(codeBlock.addSpace());
 
 /**
  * Add description
@@ -32,8 +36,8 @@ codeBlock
          )
          .addOutput("<main id='main1'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
-   .addSibbling(codeBlock.addLine('result = re.findall(pattern, data.text)'))
-   .addSibbling(codeBlock.addSpace());
+   .addSibling(codeBlock.addLine('result = re.findall(pattern, data.text)'))
+   .addSibling(codeBlock.addSpace());
 
 codeBlock
    .addLine("pattern = re.compile('<li>.*</li>')")
@@ -47,5 +51,5 @@ codeBlock
          )
          .addOutput("<main id='main1'>\n<span>ดูเพิ่ม</span>\n</main>"),
    )
-   .addSibbling(codeBlock.addLine("result = re.findall(pattern, '\\n'.join(result))"))
-   .addSibbling(codeBlock.addSpace());
+   .addSibling(codeBlock.addLine("result = re.findall(pattern, '\\n'.join(result))"))
+   .addSibling(codeBlock.addSpace());

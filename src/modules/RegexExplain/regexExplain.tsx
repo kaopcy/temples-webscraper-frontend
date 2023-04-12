@@ -10,7 +10,7 @@ const RegexExplain: React.FC = () => {
    return (
       <Layout pageKey="regex-explain">
          <div className=" flex min-h-screen w-full flex-col items-center bg-[#181a1f] py-32 px-4">
-            <h1 className="mb-20 text-5xl font-bold text-white">
+            <h1 className="mb-0 md:mb-20 text-3xl text-center md:text-5xl font-bold text-white">
                อธิบาย Regular expression ที่ใช้
             </h1>
             <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-y-10">

@@ -26,7 +26,7 @@ export class CodeLine {
    getDescription() {
       return this.description;
    }
-   addSibbling(newSibling: CodeLine) {
+   addSibling(newSibling: CodeLine) {
       newSibling.zone = this.zone;
       newSibling.description = this.description;
       return newSibling;

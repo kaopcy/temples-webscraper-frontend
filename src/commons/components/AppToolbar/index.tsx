@@ -14,12 +14,11 @@ const AppToolbar = () => {
    const { push, pathname } = useRouter();
 
    const onHomeClick = () => {
-      push('/temples/1', '/temples/1', { scroll: false })
+      push('/temples/1', '/temples/1', { scroll: false });
    };
 
-   const isHomeActive = pathname === '/temples/[page]'
-   const isRegexActive = pathname === '/regex-explain'
-   
+   const isHomeActive = pathname === '/temples/[page]';
+   const isRegexActive = pathname === '/regex-explain';
 
    const onAllTemplesClick = () => {
       csvPopupRef.current?.close();
@@ -35,10 +34,10 @@ const AppToolbar = () => {
 
    return (
       <>
-         <div className="fixed  z-0  md:right-[3%] lg:right-[5%] flex flex-col-reverse  items-center gap-3 md:bottom-10 md:gap-5">
+         <div className="fixed  right-[3%] bottom-10 z-0  flex flex-col-reverse items-center gap-3  md:right-[3%] md:bottom-10 md:gap-5 lg:right-[5%]">
             <AppToolbarButton
                active={isHomeActive}
-               icon={isHomeActive ? "mdi:home-sound-out" : "mdi:home-outline"}
+               icon={isHomeActive ? 'mdi:home-sound-out' : 'mdi:home-outline'}
                description="หน้าหลัก"
                onClick={onHomeClick}
             />
