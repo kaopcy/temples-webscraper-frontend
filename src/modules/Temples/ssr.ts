@@ -1,14 +1,13 @@
 import { wrapper } from '@/redux/store';
-import axios from 'axios';
 import { GetServerSideProps } from 'next';
-
-import { ITempleResponse } from '@/types/api/temple.response.type';
 
 import { ProvinceEnum } from '@/types/filter.type';
 import { IOptions, ITemple } from '@/types/temple.type';
-import { templeSearchActions } from './redux/templeSearch';
 import { provinceFilterActions } from './redux/provinceFilter';
+import { templeSearchActions } from './redux/templeSearch';
 import { templesAction } from './redux/temples';
+
+import { url } from '@/configs/apiUrl';
 
 export const getServerSideProps: GetServerSideProps<{
    temples: ITemple[];
@@ -16,7 +15,8 @@ export const getServerSideProps: GetServerSideProps<{
    page: string;
    filter: ProvinceEnum[];
    search: string;
-}> = wrapper.getServerSideProps((store) => async ({ query }) => {
+}> = wrapper.getServerSideProps((store) => async ({ query, res }) => {
+   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
    const { page, filter, search } = query;
 
    const pageQuery = Array.isArray(page) ? page[0] : page ?? '1';
@@ -33,13 +33,7 @@ export const getServerSideProps: GetServerSideProps<{
       ? ([filter] as ProvinceEnum[])
       : (Object.keys(ProvinceEnum) as ProvinceEnum[]);
 
-   console.log(arrayFilterQuery);
-
    const searchQuery = Array.isArray(search) ? search[0] : search ?? '';
-   console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
-   const encodedUrl = encodeURI(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/temple/aa/?search=${searchQuery}&page=${pageQuery}&filter=${filterQuery}`,
-   );
 
    let templesResult: ITemple[] | never[] = [];
    let optionsResult: IOptions = {
@@ -49,7 +43,12 @@ export const getServerSideProps: GetServerSideProps<{
    };
 
    try {
-      const { data } = await axios.get<ITempleResponse>(encodedUrl);
+      const { data } = await url.getTemplesWithFilter({
+         searchQuery,
+         pageQuery,
+         filterQuery,
+      });
+
       const { data: temples, options } = data;
 
       templesResult = temples ?? templesResult;
@@ -60,6 +59,7 @@ export const getServerSideProps: GetServerSideProps<{
             initSearchQuery: searchQuery,
          }),
       );
+
       store.dispatch(
          provinceFilterActions.initFilter({
             provinces: arrayFilterQuery,
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps<{
          }),
       );
    } catch (error) {
-      console.log(error)
+      console.log(error);
    }
 
    return {

@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { GetServerSideProps } from 'next';
 
+import { url } from '@/configs/apiUrl';
 import { ITemple } from '@/types/temple.type';
 
 export const getServerSideProps: GetServerSideProps<{
@@ -8,27 +8,23 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ({ query, res }) => {
    res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
    const { temple } = query;
-   
+
    const templeQuery = Array.isArray(temple) ? temple[0] : temple ?? '';
-   
-   const encodedUrl = encodeURI(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/temple/${templeQuery}`,
-      );
-      
-      let templeResult: ITemple | null = null;
-      console.log(temple)
+
+   let templeResult: ITemple | null = null;
+   console.log(temple);
 
    try {
-      const { data: temple } = await axios.get<ITemple>(encodedUrl);
+      const { data: temple } = await url.getTempleByTempleName({ templeQuery });
       templeResult = temple;
-      console.log(templeResult)
+      console.log(templeResult);
       if (!temple) {
          return {
             notFound: true,
          };
       }
    } catch (error) {
-      console.log(error)
+      console.log(error);
    }
 
    return {

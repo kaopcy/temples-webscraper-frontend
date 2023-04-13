@@ -1,8 +1,8 @@
+import { url } from '@/configs/apiUrl';
 import { ProvinceEnum } from '@/types/filter.type';
 import { IProvince, ITemple } from '@/types/temple.type';
 import { provinceTranslator } from '@/utils/getTranslateProvince';
 import { Icon } from '@iconify/react';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const AllTemplesPage = () => {
@@ -10,9 +10,7 @@ const AllTemplesPage = () => {
 
    useEffect(() => {
       const fetch = async () => {
-         const { data } = await axios.get<IProvince[]>(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/province`,
-         );
+         const { data } = await url.getAllTemples();
          setTemples(data);
       };
       fetch();
@@ -37,7 +35,7 @@ const AllTemplesPage = () => {
                </div>
             ))
          ) : (
-            <div className="flex items-center mx-auto gap-x-4">
+            <div className="mx-auto flex items-center gap-x-4">
                <h1 className="">กำลังโหลด</h1>
                <Icon icon="mingcute:loading-3-line" className="h-8 w-8 animate-spin" />
             </div>

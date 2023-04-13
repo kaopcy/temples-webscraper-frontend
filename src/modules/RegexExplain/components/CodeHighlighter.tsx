@@ -1,5 +1,5 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import nightOwl from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
 import { useCodeBlock } from '../hooks/useCodeBlock';
 import { useEffect } from 'react';
 import { useUpdateEffect } from 'react-use';
