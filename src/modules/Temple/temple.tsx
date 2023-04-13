@@ -10,13 +10,14 @@ import { provinceTranslator } from '@/utils/getTranslateProvince';
 /** hooks */
 /** sections */
 import ImagesGallery from '@/modules/Temple/components/ImagesGallery';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
+import HtmlParser from 'html-react-parser';
 
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
-import { getServerSideProps } from './ssr';
+import { getStaticProps } from './ssr';
 
-const Temple: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({ temple }) => {
+const Temple: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ temple }) => {
    const { back } = useRouter();
 
    return (
@@ -52,11 +53,9 @@ const Temple: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> =
                   </p>
                ) : (
                   <>
-                     <p
-                        // eslint-disable-next-line react/no-danger
-                        dangerouslySetInnerHTML={{ __html: temple?.detail ?? '' }}
-                        className=" mt-10 self-start text-lg leading-8 tracking-wide text-text/70"
-                     />
+                     <div className=" mt-10 self-start text-lg leading-8 tracking-wide text-text/70">
+                        {HtmlParser(temple?.detail ?? '')}
+                     </div>
                      <LinkNewTab className="mt-20 mb-60 self-end" href={temple?.link}>
                         <span className="text-sky-500 hover:underline">
                            {temple?.link && decodeURI(temple.link)}

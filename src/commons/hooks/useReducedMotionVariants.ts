@@ -2,7 +2,7 @@ import { Variants } from 'framer-motion';
 import { useMedia } from 'react-use';
 
 export const useReducedMotionVariant = () => {
-   const isMobile = useMedia('(max-width: 768px)');
+   const isMobile = useMedia('(max-width: 768px)', false);
 
    const getReducedVariant = (variant: Variants): Variants => {
       const a = Object.fromEntries(

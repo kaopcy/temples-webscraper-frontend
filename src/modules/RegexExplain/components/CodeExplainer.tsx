@@ -1,14 +1,12 @@
-import HTMLParser, { HTMLReactParserOptions, Element } from 'html-react-parser';
+import { Element, HTMLReactParserOptions } from 'html-react-parser';
 
-import { useUpdateEffect } from 'react-use';
-import { useCodeBlock } from '../hooks/useCodeBlock';
+import { IModalHandler } from '@/components/ModalLayout';
+import { Icon } from '@iconify/react';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { Description } from '../utils/DescriptionBuilder';
+import { useCodeBlock } from '../hooks/useCodeBlock';
 import { CodeLine } from '../utils/CodeBlockBuilder';
-import { Icon } from '@iconify/react';
 import CodePopup from './CodePopup';
-import { IModalHandler } from '@/components/ModalLayout';
 
 const variants: Variants = {
    initial: {

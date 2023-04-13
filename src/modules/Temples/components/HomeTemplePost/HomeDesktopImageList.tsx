@@ -22,8 +22,8 @@ const HomeDesktopImageList: React.FC<{ temple: ITemple }> = ({ temple }) => {
                         fill
                         sizes="25vw"
                         className="h-full w-full object-cover"
-                        alt={temple.name}
-                        src={temple?.images?.[index + 1]?.url ?? ''}
+                        alt={`${temple.name}-${index}-${'awdaw'}`}
+                        src={temple?.images?.[index + 1]?.url ?? 'rrr'}
                      />
                      {index === 2 && (
                         <div
@@ -31,20 +31,10 @@ const HomeDesktopImageList: React.FC<{ temple: ITemple }> = ({ temple }) => {
                               'absolute z-10 flex h-full w-full cursor-pointer items-center justify-center  bg-black/60 text-white transition-all duration-500',
                            )}
                         >
-                           + {temple?.images?.length ? temple?.images?.length - 4 : 26} รูป
+                           + {temple?.imageCount ? temple?.imageCount - 4 : 26} รูป
                         </div>
                      )}
                   </>
-                  // <Image
-                  //    className="h-full w-full"
-                  //    alt={temple.name}
-                  //    src={temple?.images?.[index + 1]?.url ?? ''}
-                  //    isLazy
-                  //    overlayRender={() =>
-                  //       index === 2 && (
-                  //       )
-                  //    }
-                  // />
                )}
             </div>
          ))}

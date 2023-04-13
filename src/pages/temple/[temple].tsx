@@ -1,2 +1,2 @@
 export { default } from '@/modules/Temple/temple';
-export { getServerSideProps } from '@/modules/Temple/ssr';
+export { getStaticPaths, getStaticProps } from '@/modules/Temple/ssr';

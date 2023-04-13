@@ -20,8 +20,8 @@ const HomeMobileImageList: React.FC<{ temple: ITemple }> = ({ temple }) => {
                      fill
                      sizes="25vw"
                      className="h-full w-full object-cover"
-                     alt={temple.name}
-                     src={temple?.images?.[index + 1]?.url ?? ''}
+                     alt={`${temple.name}-${index}`}
+                     src={temple?.images?.[index]?.url ?? ''}
                   />
                )}
             </div>

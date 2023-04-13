@@ -1,23 +1,30 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticProps, GetStaticPathsResult, GetStaticPaths } from 'next';
 
 import { url } from '@/configs/apiUrl';
 import { ITemple } from '@/types/temple.type';
 
-export const getServerSideProps: GetServerSideProps<{
+export const getStaticPaths: GetStaticPaths = async () => {
+   const { data } = await url.getAllTemples();
+   const templesName = data.flatMap((e) => e.temples.map((e) => e.name)).filter(e=> !e.includes(' '));
+
+   return {
+      paths: templesName.map((e) => ({ params: { temple: e } })),
+      fallback: true, // can also be true or 'blocking'
+   };
+};
+
+export const getStaticProps: GetStaticProps<{
    temple: ITemple;
-}> = async ({ query, res }) => {
-   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
-   const { temple } = query;
+}> = async ({ params }) => {
+   const { temple } = params as { temple: string };
 
    const templeQuery = Array.isArray(temple) ? temple[0] : temple ?? '';
 
    let templeResult: ITemple | null = null;
-   console.log(temple);
 
    try {
       const { data: temple } = await url.getTempleByTempleName({ templeQuery });
       templeResult = temple;
-      console.log(templeResult);
       if (!temple) {
          return {
             notFound: true,
