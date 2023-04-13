@@ -18,7 +18,9 @@ import { useRouter } from 'next/router';
 import { getStaticProps } from './ssr';
 
 const Temple: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ temple }) => {
-   const { back } = useRouter();
+   const { back, isFallback } = useRouter();
+
+   if(isFallback) return <div className="">loading</div>
 
    return (
       <Layout pageKey={temple.name}>
