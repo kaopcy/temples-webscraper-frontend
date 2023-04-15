@@ -27,69 +27,70 @@ const OverlayVariant: Variants = {
    },
 };
 
-const ModalLayout = forwardRef<IModalHandler, { children: React.ReactNode }>(
-   ({ children }, ref) => {
-      const [isOpen, setIsOpen] = useState(false);
+const ModalLayout = forwardRef<
+   IModalHandler,
+   { children: React.ReactNode | ((handler: Omit<IModalHandler, 'active'>) => React.ReactNode) }
+>(({ children }, ref) => {
+   const [isOpen, setIsOpen] = useState(false);
 
-      useImperativeHandle(
-         ref,
-         (): IModalHandler => ({
-            active: isOpen,
-            close,
-            open,
-            toggle,
-         }),
-      );
+   useImperativeHandle(
+      ref,
+      (): IModalHandler => ({
+         active: isOpen,
+         close,
+         open,
+         toggle,
+      }),
+   );
 
-      const close = () => {
-         document.body.style.overflow = 'auto';
-         setIsOpen(false);
-      };
-      const open = () => {
-         document.body.style.overflow = 'hidden';
-         setIsOpen(true);
-      };
-      const toggle = () => {
-         setIsOpen((e) => {
-            if (e) {
-               document.body.style.overflow = 'auto';
-            } else {
-               document.body.style.overflow = 'hidden';
-            }
+   const close = () => {
+      document.body.style.overflow = 'auto';
+      setIsOpen(false);
+   };
+   const open = () => {
+      document.body.style.overflow = 'hidden';
+      setIsOpen(true);
+   };
+   const toggle = () => {
+      setIsOpen((e) => {
+         if (e) {
+            document.body.style.overflow = 'auto';
+         } else {
+            document.body.style.overflow = 'hidden';
+         }
 
-            return !e;
-         });
-      };
+         return !e;
+      });
+   };
 
-      const portalRef = useRef<Element | null>(null);
-      const [mounted, setMounted] = useState(false);
+   const portalRef = useRef<Element | null>(null);
+   const [mounted, setMounted] = useState(false);
 
-      useEffect(() => {
-         portalRef.current = document.querySelector<HTMLElement>('#portal');
-         setMounted(true);
-      }, []);
+   useEffect(() => {
+      portalRef.current = document.querySelector<HTMLElement>('#portal');
+      setMounted(true);
+   }, []);
 
-      return mounted && portalRef.current
-         ? createPortal(
-              <AnimatePresence mode="wait">
-                 {isOpen && (
-                    <>
-                       <motion.div
-                          onClick={close}
-                          variants={OverlayVariant}
-                          animate="animate"
-                          initial="initial"
-                          exit="exit"
-                          className="fixed inset-0 z-0 bg-[#00000099]"
-                       ></motion.div>
-                       {children}
-                    </>
-                 )}
-              </AnimatePresence>,
-              portalRef.current,
-           )
-         : null;
-   },
-);
+   return mounted && portalRef.current
+      ? createPortal(
+           <AnimatePresence mode="wait">
+              {isOpen && (
+                 <>
+                    <motion.div
+                       onClick={close}
+                       variants={OverlayVariant}
+                       animate="animate"
+                       initial="initial"
+                       exit="exit"
+                       className="fixed inset-0 z-0 bg-[#00000099]"
+                    ></motion.div>
+                    {typeof children == 'function' ? children({ close, open, toggle }) : children}
+                 </>
+              )}
+           </AnimatePresence>,
+           portalRef.current,
+        )
+      : null;
+});
 
 export default ModalLayout;

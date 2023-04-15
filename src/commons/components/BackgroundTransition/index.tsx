@@ -3,6 +3,7 @@ import { Router } from 'next/router';
 import RegexExplainBackgroundText from './RegexExplainBackgroundText';
 import TempleBackgroundText from './TempleBackgroundText';
 import TemplesBackgroundText from './TemplesBackgroundText';
+import AllTemplesBackgroundText from './AllTemplesBackgroundText';
 
 const BackgroundTransition: React.FC<{ children: React.ReactNode; router: Router }> = ({
    children,
@@ -20,6 +21,9 @@ const BackgroundTransition: React.FC<{ children: React.ReactNode; router: Router
 
          case 'regex-explain':
             return <RegexExplainBackgroundText router={router} />;
+
+         case 'all_temples':
+            return <AllTemplesBackgroundText router={router} />;
 
          default:
             return <TempleBackgroundText router={router} />;

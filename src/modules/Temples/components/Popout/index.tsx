@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
 import { provinceTranslator } from '@/utils/getTranslateProvince';
 import { ProvinceEnum } from '@/types/filter.type';
-import { useMedia } from 'react-use';
+import { useMedia, useUpdateEffect } from 'react-use';
 
 type IPopout = {
    hovering: boolean;
@@ -66,6 +66,29 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
 
    const [hoveringLink, setHoveringLink] = useState(false);
    const isMobile = useMedia('(max-width: 768px)', false);
+
+   useUpdateEffect(() => {
+      if (hovering) {
+         document.body.style.overflow = 'hidden';
+
+         if (isMobile) {
+            window.scrollTo({
+               top: 200,
+            });
+         } else {
+            window.scrollTo({
+               top: 0,
+               behavior: 'smooth',
+            });
+         }
+      } else {
+         document.body.style.overflow = 'auto';
+      }
+
+      return () => {
+         document.body.style.overflow = 'auto';
+      };
+   }, [hovering, isMobile]);
 
    const {
       push,

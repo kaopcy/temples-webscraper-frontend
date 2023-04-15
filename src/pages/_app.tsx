@@ -52,6 +52,10 @@ export function App({ Component, ...rest }: AppProps) {
    const { store, props } = wrapper.useWrappedStore(rest);
    const { pageProps, router } = props;
 
+   useEffect(()=> {
+      window.history.scrollRestoration = 'manual';
+   }, [])
+
    useRouterChange({
       handleStart: () => {
          NProgress.start();

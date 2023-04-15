@@ -22,7 +22,8 @@ const AppToolbar = () => {
 
    const onAllTemplesClick = () => {
       csvPopupRef.current?.close();
-      allTemplePopupRef.current?.toggle();
+      push('/all_temples')
+      // allTemplePopupRef.current?.toggle();
    };
    const onRegexClick = () => {
       push('/regex-explain', '/regex-explain', { scroll: false });
@@ -42,13 +43,13 @@ const AppToolbar = () => {
                onClick={onHomeClick}
             />
             <AppToolbarButton
-               active={!!allTemplePopupRef.current?.active}
+               active={false}
                icon="fluent:text-bullet-list-square-24-regular"
                description="รายชื่อวัดทั้งหมด"
                onClick={onAllTemplesClick}
             />
             <AppToolbarButton
-               active={!!allTemplePopupRef.current?.active}
+               active={false}
                icon="ph:file-csv-light"
                description="ไฟล์ csv"
                onClick={onCsvClick}

@@ -16,6 +16,7 @@ import HtmlParser from 'html-react-parser';
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
 import { getStaticProps } from './ssr';
+import './test.module.css'
 
 const Temple: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ temple }) => {
    const { back, isFallback } = useRouter();

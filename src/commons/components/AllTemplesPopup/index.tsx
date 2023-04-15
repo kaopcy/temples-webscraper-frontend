@@ -1,6 +1,6 @@
 import { HTMLMotionProps, Variants, motion } from 'framer-motion';
 import { forwardRef } from 'react';
-import AllTemplesPage from '../AllTempleToolbar/AllTemplesPage';
+import AllTemplesPage from './AllTemplesPage';
 import ModalLayout, { IModalHandler } from '../ModalLayout';
 
 const ContainerVariants: Variants = {
@@ -29,16 +29,18 @@ const ContainerVariants: Variants = {
 const AllTemplesPopup = forwardRef<IModalHandler, HTMLMotionProps<'div'>>(({ ...rest }, ref) => {
    return (
       <ModalLayout ref={ref}>
-         <motion.div
-            variants={ContainerVariants}
-            animate="animate"
-            initial="initial"
-            exit="exit"
-            className="fixed top-[70px] flex h-[calc(100%-70px)] w-screen flex-col items-center overflow-auto bg-white "
-            {...rest}
-         >
-            <AllTemplesPage />
-         </motion.div>
+         {({ close }) => (
+            <motion.div
+               variants={ContainerVariants}
+               animate="animate"
+               initial="initial"
+               exit="exit"
+               className="fixed top-[30px] flex h-[calc(100%-30px)] w-screen flex-col items-center overflow-auto bg-white"
+               {...rest}
+            >
+               <AllTemplesPage close={close} />
+            </motion.div>
+         )}
       </ModalLayout>
    );
 });

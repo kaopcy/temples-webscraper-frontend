@@ -12,7 +12,7 @@ export interface ITemple {
    provinceName: ProvinceEnum;
    link: string;
    detail: string;
-   imageCount: number;
+   imagesCount: number;
    images: (IImage | undefined)[] | null;
 }
 

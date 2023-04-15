@@ -23,7 +23,7 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
 
    return (
       <Layout pageKey={page}>
-         <div className="flex h-full w-full flex-col items-center px-3 pt-20 md:px-0">
+         <div className="flex h-full w-full flex-col items-center px-3 pt-20 md:px-0 ">
             <motion.div
                className="pointer-events-none fixed  inset-0 h-full w-full bg-black"
                initial={{ opacity: 0, zIndex: 2 }}
@@ -34,22 +34,22 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
                }}
             />
 
-            <motion.div
-               initial={{ y: -100, opacity: 0 }}
-               animate={{ y: 0, x: 0, opacity: 1 }}
+            {/* <motion.div
+               initial={{ x: -400, opacity: 0 }}
+               animate={{ x: 0, opacity: 1 }}
                transition={{
-                  delay: 0.5,
                   type: 'spring',
-                  stiffness: 260,
+                  stiffness: 150,
+                  mass: 2,
                   damping: 20,
-                  duration: 3,
+                  duration: 2,
                }}
                className=""
-            >
+            > */}
                <h1 className="my-10 whitespace-nowrap text-6xl tracking-wider sm:text-[80px]">
                   วัดไทย.
                </h1>
-            </motion.div>
+            {/* </motion.div> */}
             <Popout
                className=""
                hovering={hovering}

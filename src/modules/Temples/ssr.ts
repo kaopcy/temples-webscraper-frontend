@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps<{
    filter: ProvinceEnum[];
    search: string;
 }> = wrapper.getServerSideProps((store) => async ({ query, res }) => {
-   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+   // res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
    const { page, filter, search } = query;
 
    const pageQuery = Array.isArray(page) ? page[0] : page ?? '1';

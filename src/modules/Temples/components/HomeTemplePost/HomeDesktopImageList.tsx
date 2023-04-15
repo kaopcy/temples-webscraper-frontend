@@ -31,7 +31,7 @@ const HomeDesktopImageList: React.FC<{ temple: ITemple }> = ({ temple }) => {
                               'absolute z-10 flex h-full w-full cursor-pointer items-center justify-center  bg-black/60 text-white transition-all duration-500',
                            )}
                         >
-                           + {temple?.imageCount ? temple?.imageCount - 4 : 26} รูป
+                           + {temple?.imagesCount ? temple?.imagesCount - 4 : 14} รูป
                         </div>
                      )}
                   </>

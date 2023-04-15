@@ -16,12 +16,13 @@ const HomeProvinceFilterChip: React.FC<{ provinceName: ProvinceEnum }> = ({ prov
          initial={false}
          layout
          onClick={() => toggleProvince(provinceName)}
-         className={`relative md:flex-grow-0 flex-grow flex items-center gap-x-2 rounded-2xl border-2  border-text px-6  py-0.5 hover:bg-[#00000011] ${
+         className={`relative flex min-w-[100px] flex-grow items-center gap-x-2 rounded-2xl border-2 border-text  px-6 py-0.5  hover:bg-[#00000011] md:flex-grow-0 ${
             isProvinceActive(provinceName) ? '!bg-text !text-white' : 'bg-white text-text'
          }`}
       >
          <motion.div
             className=""
+            initial={false}
             animate={{
                x: isProvinceActive(provinceName) ? '-10px' : '0',
             }}
