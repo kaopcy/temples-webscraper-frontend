@@ -12,19 +12,20 @@ import HomeTemplePost from './components/HomeTemplePost';
 import SearchBar from './components/SearchBar';
 import { getServerSideProps } from './ssr';
 import HomeSearchResult from './components/HomeSearchResult';
+import HomeSearchFilterPopout from './components/HomeSearchFilterPopout';
 
 const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
    temples,
    options,
    page,
-   search
+   search,
 }) => {
-   const [hovering, setHovering] = useState<boolean>(false);
+   // const [hovering, setHovering] = useState<boolean>(false);
 
    return (
       <Layout pageKey={page}>
          <div className="flex h-full w-full flex-col items-center px-3 pt-20 md:px-0 ">
-            <motion.div
+            {/* <motion.div
                className="pointer-events-none fixed  inset-0 h-full w-full bg-black"
                initial={{ opacity: 0, zIndex: 2 }}
                animate={{ opacity: hovering ? 0.8 : 0, pointerEvents: hovering ? 'auto' : 'none' }}
@@ -32,32 +33,20 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
                onMouseDown={() => {
                   setHovering(false);
                }}
-            />
+            /> */}
 
-            {/* <motion.div
-               initial={{ x: -400, opacity: 0 }}
-               animate={{ x: 0, opacity: 1 }}
-               transition={{
-                  type: 'spring',
-                  stiffness: 150,
-                  mass: 2,
-                  damping: 20,
-                  duration: 2,
-               }}
-               className=""
-            > */}
-               <h1 className="my-10 whitespace-nowrap text-6xl tracking-wider sm:text-[80px]">
-                  วัดไทย.
-               </h1>
-            {/* </motion.div> */}
-            <Popout
-               className=""
-               hovering={hovering}
-               setHovering={setHovering}
-            >
+            <h1 className="my-10 whitespace-nowrap text-6xl tracking-wider sm:text-[80px]">
+               วัดไทย.
+            </h1>
+            {/* <Popout className="" hovering={hovering} setHovering={setHovering}>
                <SearchBar />
                <HomeProvinceFilter />
-            </Popout>
+            </Popout> */}
+
+            <HomeSearchFilterPopout>
+               <SearchBar />
+               <HomeProvinceFilter />
+            </HomeSearchFilterPopout>
 
             <HomeSearchResult search={search} />
 

@@ -3,6 +3,7 @@ import { useMedia } from 'react-use';
 
 export const useReducedMotionVariant = () => {
    const isMobile = useMedia('(max-width: 768px)', false);
+   const isDesktop = useMedia('(min-width: 768px)', false);
 
    const getReducedVariant = (variant: Variants): Variants => {
       const a = Object.fromEntries(
@@ -10,5 +11,5 @@ export const useReducedMotionVariant = () => {
       );
       return a;
    };
-   return { getReducedVariant, isMobile };
+   return { getReducedVariant, isMobile, isDesktop };
 };

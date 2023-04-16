@@ -16,12 +16,12 @@ import HtmlParser from 'html-react-parser';
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
 import { getStaticProps } from './ssr';
-import './test.module.css'
+import './test.module.css';
 
 const Temple: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ temple }) => {
    const { back, isFallback } = useRouter();
 
-   if(isFallback) return <div className="">loading</div>
+   if (isFallback) return <div className="">loading</div>;
 
    return (
       <Layout pageKey={temple.name}>
@@ -39,13 +39,9 @@ const Temple: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ temp
                   <Icon className="h-4 w-4 text-red-500" icon="material-symbols:location-on" />
                   <span className="text-base text-text-light">จังหวัดแม่ฮ่องสอน</span>
                </div>
-               {/* <div className="flex items-center">
-                  <span>{temple?.provinceName}</span>
-               </div> */}
-               {/* <TripTagsGroup /> */}
                <ImagesGallery temple={temple} />
                {temple?.detail?.includes('detail') ? (
-                  <p className=" mt-10 mb-60 self-start break-all text-lg leading-8 tracking-wide text-text/70">
+                  <p className=" mt-10 mb-60 self-start break-all text-base leading-8 tracking-wide  md:text-lg">
                      <b className="mr-1 text-base font-bold text-text">{temple?.name}</b>
                      เป็นวัดใน{provinceTranslator(
                         temple?.provinceName,
@@ -56,7 +52,7 @@ const Temple: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ temp
                   </p>
                ) : (
                   <>
-                     <div className=" mt-10 self-start text-lg leading-8 tracking-wide text-text/70">
+                     <div className=" mt-10 self-start leading-8 tracking-wide text-text md:text-lg ">
                         {HtmlParser(temple?.detail ?? '')}
                      </div>
                      <LinkNewTab className="mt-20 mb-60 self-end" href={temple?.link}>

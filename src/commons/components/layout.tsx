@@ -53,11 +53,7 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
 }) => {
    const { isRight } = useContext(PageTransitionContext);
 
-   const { getReducedVariant, isMobile } = useReducedMotionVariant();
-
-   useEffect(() => {
-      console.log('isMobile: ', isMobile ? 'yes' : 'no');
-   }, [isMobile]);
+   const { isMobile, isDesktop } = useReducedMotionVariant();
 
    return (
       <motion.div
@@ -72,10 +68,10 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
          <motion.div
             key={pageKey}
             custom={isRight(pageKey)}
-            variants={insideMotionVariants}
-            initial={'initial'}
-            animate={'animate'}
-            exit={'exit'}
+            variants={isDesktop ? insideMotionVariants : undefined}
+            initial={isDesktop ? 'initial' : ''}
+            animate={isDesktop ? 'animate' : ''}
+            exit={isDesktop ? 'exit' : ''}
             transition={{
                duration: 1,
             }}

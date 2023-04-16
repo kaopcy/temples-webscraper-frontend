@@ -1,3 +1,4 @@
+import { lockBodyScroll } from '@/utils/lockBodyScroll';
 import { AnimatePresence, Variants, motion } from 'framer-motion';
 import { useState, useImperativeHandle, forwardRef, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
@@ -44,19 +45,19 @@ const ModalLayout = forwardRef<
    );
 
    const close = () => {
-      document.body.style.overflow = 'auto';
+      lockBodyScroll.unlock();
       setIsOpen(false);
    };
    const open = () => {
-      document.body.style.overflow = 'hidden';
+      lockBodyScroll.lock();
       setIsOpen(true);
    };
    const toggle = () => {
       setIsOpen((e) => {
          if (e) {
-            document.body.style.overflow = 'auto';
+            lockBodyScroll.unlock();
          } else {
-            document.body.style.overflow = 'hidden';
+            lockBodyScroll.lock();
          }
 
          return !e;

@@ -24,7 +24,7 @@ const HomeMaxHeightOverlayText: React.FC<{
                <span className="text-blue-500 underline">{decodeURI(temple?.link)}</span>
             </p>
          ) : (
-            <div className="  text-base font-normal  text-text-light ">
+            <div className="  text-base font-normal  text-text">
                {ReactHtmlParser(htmlDetailString)}
             </div>
          )}

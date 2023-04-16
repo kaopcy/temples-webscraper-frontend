@@ -8,7 +8,9 @@ import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
 import { provinceTranslator } from '@/utils/getTranslateProvince';
 import { ProvinceEnum } from '@/types/filter.type';
-import { useMedia, useUpdateEffect } from 'react-use';
+import { useMedia, useUpdateEffect, useLockBodyScroll } from 'react-use';
+
+import { lockBodyScroll } from '@/utils/lockBodyScroll';
 
 type IPopout = {
    hovering: boolean;
@@ -66,10 +68,12 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
 
    const [hoveringLink, setHoveringLink] = useState(false);
    const isMobile = useMedia('(max-width: 768px)', false);
+   const isDesktop = useMedia('(min-width: 768px)', false);
+
 
    useUpdateEffect(() => {
       if (hovering) {
-         document.body.style.overflow = 'hidden';
+         lockBodyScroll.lock();
 
          if (isMobile) {
             window.scrollTo({
@@ -82,11 +86,11 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
             });
          }
       } else {
-         document.body.style.overflow = 'auto';
+         lockBodyScroll.unlock();
       }
 
       return () => {
-         document.body.style.overflow = 'auto';
+         lockBodyScroll.unlock();
       };
    }, [hovering, isMobile]);
 
@@ -114,7 +118,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
          onSubmit={onSubmit}
          className={classname('relative z-10 rounded-lg   bg-white  pt-10  ', rest.className ?? '')}
          animate={
-            !isMobile
+            isDesktop
                ? {
                     paddingLeft: '40px',
                     paddingRight: '40px',

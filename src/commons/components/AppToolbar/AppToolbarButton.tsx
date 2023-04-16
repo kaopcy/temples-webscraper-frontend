@@ -84,7 +84,7 @@ const AppToolbarButton: React.FC<HTMLMotionProps<'button'> & IIconButtonProps> =
          whileHover="hover"
          animate="rest"
          className={classname(
-            'relative z-10 flex h-10 w-10   cursor-pointer items-center rounded-full border-2  md:h-14 md:w-14',
+            'relative z-10 flex h-11 w-11   cursor-pointer items-center rounded-full border-2  md:h-14 md:w-14',
             active ? 'border-text' : 'border-text',
          )}
          {...rest}
