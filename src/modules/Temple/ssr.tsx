@@ -26,11 +26,11 @@ export const getStaticProps: GetStaticProps<{
     * if not it will fail when build in production (linux server)
     * I guess it's because building a huge amount of pages (1500+ pages) 
     */
-   // await new Promise((s) => {
-   //    setTimeout(() => {
-   //       s(null);
-   //    }, 1000);
-   // });
+   await new Promise((s) => {
+      setTimeout(() => {
+         s(null);
+      }, 1000);
+   });
 
    let templeResult: ITemple | null = null;
 

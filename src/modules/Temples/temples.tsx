@@ -1,18 +1,14 @@
-import { motion } from 'framer-motion';
 import { InferGetServerSidePropsType } from 'next';
-import { useEffect, useState } from 'react';
 
 import Layout from '@/components/layout';
 import Pagination from '@/components/Pagination';
-import Popout from '@/modules/Temples/components/Popout';
 
-import { useRouter } from 'next/router';
 import HomeProvinceFilter from './components/HomeProvinceFilter';
+import HomeSearchFilterPopout from './components/HomeSearchFilterPopout';
+import HomeSearchResult from './components/HomeSearchResult';
 import HomeTemplePost from './components/HomeTemplePost';
 import SearchBar from './components/SearchBar';
 import { getServerSideProps } from './ssr';
-import HomeSearchResult from './components/HomeSearchResult';
-import HomeSearchFilterPopout from './components/HomeSearchFilterPopout';
 
 const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
    temples,
@@ -20,29 +16,12 @@ const Temples: React.FC<InferGetServerSidePropsType<typeof getServerSideProps>> 
    page,
    search,
 }) => {
-   // const [hovering, setHovering] = useState<boolean>(false);
-
    return (
       <Layout pageKey={page}>
          <div className="flex h-full w-full flex-col items-center px-3 pt-20 md:px-0 ">
-            {/* <motion.div
-               className="pointer-events-none fixed  inset-0 h-full w-full bg-black"
-               initial={{ opacity: 0, zIndex: 2 }}
-               animate={{ opacity: hovering ? 0.8 : 0, pointerEvents: hovering ? 'auto' : 'none' }}
-               transition={{ duration: 0.15 }}
-               onMouseDown={() => {
-                  setHovering(false);
-               }}
-            /> */}
-
             <h1 className="my-10 whitespace-nowrap text-6xl tracking-wider sm:text-[80px]">
                วัดไทย.
             </h1>
-            {/* <Popout className="" hovering={hovering} setHovering={setHovering}>
-               <SearchBar />
-               <HomeProvinceFilter />
-            </Popout> */}
-
             <HomeSearchFilterPopout>
                <SearchBar />
                <HomeProvinceFilter />
