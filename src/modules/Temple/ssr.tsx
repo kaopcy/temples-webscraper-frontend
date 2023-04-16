@@ -5,7 +5,9 @@ import { ITemple } from '@/types/temple.type';
 
 export const getStaticPaths: GetStaticPaths = async () => {
    const { data } = await url.getAllTemples();
-   const templesName = data.flatMap((e) => e.temples.map((e) => e.name)).filter(e=> !e.includes(' '));
+   const templesName = data
+      .flatMap((e) => e.temples.map((e) => e.name))
+      .filter((e) => !e.includes(' '));
 
    return {
       paths: templesName.map((e) => ({ params: { temple: e } })),
@@ -19,6 +21,12 @@ export const getStaticProps: GetStaticProps<{
    const { temple } = params as { temple: string };
 
    const templeQuery = Array.isArray(temple) ? temple[0] : temple ?? '';
+
+   await new Promise((s) => {
+      setTimeout(() => {
+         s('');
+      }, 1000);
+   });
 
    let templeResult: ITemple | null = null;
 
