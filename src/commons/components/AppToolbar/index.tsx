@@ -19,10 +19,12 @@ const AppToolbar = () => {
 
    const isHomeActive = pathname === '/temples/[page]';
    const isRegexActive = pathname === '/regex-explain';
+   const isAllTemplesActive = pathname === '/all-temples';
 
    const onAllTemplesClick = () => {
       csvPopupRef.current?.close();
-      push('/all_temples')
+
+      push('/all-temples', '/all-temples', { scroll: false });
       // allTemplePopupRef.current?.toggle();
    };
    const onRegexClick = () => {

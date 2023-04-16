@@ -6,7 +6,6 @@ import { IProvince, ITemple } from '@/types/temple.type';
 export const getStaticProps: GetStaticProps<{
    provinces: IProvince[];
 }> = async () => {
-
    let templeResult: IProvince[] | null = null;
    try {
       const { data: provinces } = await url.getAllTemples();
@@ -20,9 +19,16 @@ export const getStaticProps: GetStaticProps<{
       console.log(error);
    }
 
+   const a = templeResult?.map((e) => ({
+      ...e,
+      temples: e.temples.map((temple) => ({
+         name: temple.name,
+      })),
+   }));
+
    return {
       props: {
-         provinces: templeResult as IProvince[],
+         provinces: a as IProvince[],
       },
    };
 };

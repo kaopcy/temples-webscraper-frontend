@@ -22,9 +22,13 @@ export const getStaticProps: GetStaticProps<{
 
    const templeQuery = Array.isArray(temple) ? temple[0] : temple ?? '';
 
+   /** Delaying each call to prevent requests overload
+    * if not it will fail when build in production (linux server)
+    * I guess it's because building a huge amount of pages (1500+ pages) 
+    */
    await new Promise((s) => {
       setTimeout(() => {
-         s('');
+         s(null);
       }, 1000);
    });
 

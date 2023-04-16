@@ -207,7 +207,7 @@ const Popout: React.FC<IPopout> = ({ children, hovering, setHovering, ...rest })
                      initial="initial"
                      animate="animate"
                      exit="exit"
-                     className="absolute top-full  left-0  z-[-1] hidden h-full  w-full max-w-[300px] flex-col pl-5 tracking-wide md:top-0 md:left-[100%] md:flex lg:max-w-[400px]"
+                     className="absolute top-full  left-0  z-[-1] hidden h-full  w-full max-w-[300px] flex-col pl-5 tracking-wide md:top-0 md:left-[100%] md:flex  lg:max-w-[300px] xl:max-w-[400px]"
                   >
                      <motion.div
                         variants={variants}

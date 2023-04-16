@@ -22,7 +22,7 @@ const BackgroundTransition: React.FC<{ children: React.ReactNode; router: Router
          case 'regex-explain':
             return <RegexExplainBackgroundText router={router} />;
 
-         case 'all_temples':
+         case 'all-temples':
             return <AllTemplesBackgroundText router={router} />;
 
          default:
