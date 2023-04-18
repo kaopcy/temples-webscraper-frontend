@@ -4,7 +4,8 @@ module.exports = {
    content: ['./src/**/*.{js,ts,jsx,tsx}'],
    theme: {
       fontFamily: {
-         primary: ['LineSeed', 'sans-serif'],
+         primary: ['var(--font-lineseed)', 'sans-serif'],
+         code: ['var(--font-mono)', 'sans-serif'],
       },
       screens: {
          xs: '360px',
