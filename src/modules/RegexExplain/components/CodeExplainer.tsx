@@ -70,7 +70,7 @@ const CodeExplainer: React.FC = () => {
    return (
       <>
          <div className=" flex w-full flex-col self-stretch pt-10">
-            <div className=" flex h-full w-full  flex-col  border md:border-l-0 border-[#383838] bg-[#181a1f]  text-white ">
+            <div className=" flex h-full w-full  flex-col  border border-[#383838] bg-[#181a1f] text-white  md:border-l-0 ">
                <div className="relative  h-full w-full overflow-hidden ">
                   <AnimatePresence initial={false} mode="sync">
                      {selectedLine !== null && currentSelectedDescription && (
@@ -83,13 +83,19 @@ const CodeExplainer: React.FC = () => {
                            key={`${currentSelectedZone}`}
                         >
                            <div className="">{currentSelectedDescription.detail}</div>
-                           <button
-                              onClick={onExampleClick}
-                              className="mt-auto flex items-center  gap-x-2 self-end rounded-md border border-text-light px-4 py-2 text-white hover:bg-black"
-                           >
-                              <Icon className=" " icon="material-symbols:play-circle-outline" />
-                              <div className="">ตัวอย่าง</div>
-                           </button>
+                           {currentSelectedDescription.input &&
+                              currentSelectedDescription.output && (
+                                 <button
+                                    onClick={onExampleClick}
+                                    className="mt-auto flex items-center  gap-x-2 self-end rounded-md border border-text-light px-4 py-2 text-white hover:bg-black"
+                                 >
+                                    <Icon
+                                       className=" "
+                                       icon="material-symbols:play-circle-outline"
+                                    />
+                                    <div className="">ตัวอย่าง</div>
+                                 </button>
+                              )}
                            {/* <div className="rounded-md bg-[#ffffff11] px-4 py-2">
                            "{currentSelectedDescription.input}""
                            </div>

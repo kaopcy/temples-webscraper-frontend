@@ -1,8 +1,6 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import nightOwl from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
 import { useCodeBlock } from '../hooks/useCodeBlock';
-import { useEffect } from 'react';
-import { useUpdateEffect } from 'react-use';
 
 const HighlighterContainer: React.FC = () => {
    const setSelectedLine = useCodeBlock()((state) => state.setSelectedLine);
@@ -14,27 +12,11 @@ const HighlighterContainer: React.FC = () => {
 
       const dataZone = e.currentTarget.getAttribute('data-zone');
       if (dataZone) setSelectedDataZone(dataZone);
-
-      // const matches = document.querySelectorAll(
-      //    `span[data-zone='${dataZone}']`,
-      // ) as NodeListOf<HTMLElement>;
-      // matches.forEach((node) => {
-      //    node.style.backgroundColor = '#ffef4015';
-      // });
-   };
-   
-   const onLineMouseLeave: React.MouseEventHandler<HTMLElement> = (e) => {
-      // const matches = document.querySelectorAll(
-      //    `span[data-zone='${e.currentTarget.getAttribute('data-zone')}']`,
-      // ) as NodeListOf<HTMLElement>;
-      // matches.forEach((node) => {
-      //    node.style.backgroundColor = 'transparent';
-      // });
    };
 
    return (
       <section className="my-auto  w-full max-w-[700px] overflow-hidden  rounded-md border border-text">
-         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 text-white font-primary">
+         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 font-code text-white">
             {codeBlock.getName()}
          </div>
 
@@ -44,9 +26,14 @@ const HighlighterContainer: React.FC = () => {
                showLineNumbers
                wrapLines
                PreTag={'div'}
-               customStyle={{ padding: '10px 17px 10px 0px', boxSizing: 'content-box', width: '100%' }}
+               customStyle={{
+                  padding: '10px 17px 10px 0px',
+                  boxSizing: 'content-box',
+                  width: '100%',
+               }}
                codeTagProps={{
-                  className: 'flex flex-col  w-full  overflow-hidden min-h-[350px]',
+                  className:
+                     'flex flex-col  w-full  overflow-y-hidden overflow-x-scroll min-h-[350px] !font-code pb-6',
                }}
                lineNumberStyle={{
                   width: '42px',
@@ -54,11 +41,10 @@ const HighlighterContainer: React.FC = () => {
                lineProps={(lineNumber) => {
                   return {
                      style: {
-                        width: '100%',
+                        width: '140%',
                         paddingRight: '100px',
                      },
                      onMouseEnter: (e) => onLineMouseEnter(e, lineNumber),
-                     onMouseLeave: onLineMouseLeave,
                      'data-zone': `${codeBlock.getName()}-${codeBlock
                         .getLine(lineNumber)
                         .getZone()}`,
