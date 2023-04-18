@@ -4,23 +4,23 @@ const wrapperVariants: Variants = {
    initial: {
       clipPath: 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
       WebkitClipPath: 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
-      transition: { ease: 'easeInOut', duration: 0.7 },
+      transition: { duration: 0.7 },
    },
    animate: {
       clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
       WebkitClipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      transition: { ease: 'easeInOut', duration: 0.7 },
+      transition: { duration: 0.7 },
    },
    exit: {
       clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
       WebkitClipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-      transition: { ease: 'easeInOut', duration: 0.7 },
+      transition: { duration: 0.7 },
    },
 };
 
 const insideMotionVariants: Variants = {
    initial: {
-      x: '-50vw',
+      x: 0,
    },
    animate: {
       x: 0,
@@ -34,7 +34,6 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
    children,
    pageKey,
 }) => {
-
    return (
       <motion.div
          key={pageKey}

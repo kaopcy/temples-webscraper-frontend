@@ -29,6 +29,7 @@ codeBlock
          '    "yasothon": "https://th.wikipedia.org/wiki/รายชื่อวัดในจังหวัดยโสธร",',
       ),
    )
+   .addSibling(codeBlock.addLine('}'))
    .addSibling(codeBlock.addSpace())
    .addSibling(codeBlock.addLine('data = requests.get(provinces["yasothon"])'))
    .addSibling(codeBlock.addSpace());
