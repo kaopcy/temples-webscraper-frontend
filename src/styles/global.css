@@ -87,7 +87,7 @@
       @apply text-base font-normal transition-colors;
    }
    p {
-      @apply  indent-10;
+      @apply indent-10;
    }
    button:focus-visible {
       @apply border-transparent outline-transparent;

@@ -19,16 +19,6 @@ import '../styles/global.css';
 const LineSeedFont = localFont({
    src: [
       {
-         path: '../styles/fonts/lineseed/LINESeedSansTH_W_He.woff',
-         weight: '900',
-         style: 'normal',
-      },
-      {
-         path: '../styles/fonts/lineseed/LINESeedSansTH_W_XBd.woff',
-         weight: '600',
-         style: 'normal',
-      },
-      {
          path: '../styles/fonts/lineseed/LINESeedSansTH_W_Bd.woff',
          weight: '700',
          style: 'normal',
@@ -38,12 +28,19 @@ const LineSeedFont = localFont({
          weight: '400',
          style: 'normal',
       },
+   ],
+   variable: '--font-lineseed',
+});
+
+const MonoFont = localFont({
+   src: [
       {
-         path: '../styles/fonts/lineseed/LINESeedSansTH_W_Th.woff',
-         weight: '300',
+         path: '../styles/fonts/mono/SourceCodePro-Regular.ttf',
+         weight: '500',
          style: 'normal',
       },
    ],
+   variable: '--font-mono',
 });
 
 NProgress.configure({ showSpinner: false, trickle: false, minimum: 0.35 });
@@ -52,9 +49,9 @@ export function App({ Component, ...rest }: AppProps) {
    const { store, props } = wrapper.useWrappedStore(rest);
    const { pageProps, router } = props;
 
-   useEffect(()=> {
+   useEffect(() => {
       window.history.scrollRestoration = 'manual';
-   }, [])
+   }, []);
 
    useRouterChange({
       handleStart: () => {
@@ -67,7 +64,7 @@ export function App({ Component, ...rest }: AppProps) {
 
    return (
       <Provider store={store}>
-         <main style={LineSeedFont.style}>
+         <main className={`${LineSeedFont.variable} ${MonoFont.variable} font-primary`}>
             <BackgroundTransition router={router}>
                <PageTransitionProvider>
                   <AnimatePresence
