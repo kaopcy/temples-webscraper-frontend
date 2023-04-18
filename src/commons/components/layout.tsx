@@ -1,64 +1,43 @@
 import { motion, Variants } from 'framer-motion';
-import { useContext, useEffect } from 'react';
-import { PageTransitionContext } from '../contexts/PageTransitionContext';
-import { useReducedMotionVariant } from '@/hooks/useReducedMotionVariants';
 
 const wrapperVariants: Variants = {
-   initial: (isRight: number) => ({
-      clipPath: isRight
-         ? 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)'
-         : 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
-      WebkitClipPath: isRight
-         ? 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)'
-         : 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
-      transition: { duration: 0.7 },
-   }),
-   animate: (isRight: number) => ({
-      clipPath: isRight
-         ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-         : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      WebkitClipPath: isRight
-         ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-         : 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      transition: { duration: 0.7 },
-   }),
-   exit: (isRight: number) => ({
-      clipPath: isRight
-         ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
-         : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-      WebkitClipPath: isRight
-         ? 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)'
-         : 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-      transition: { duration: 0.7 },
-   }),
+   initial: {
+      clipPath: 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
+      WebkitClipPath: 'polygon(0 0, 0% 0, 0% 100%, 0% 100%)',
+      transition: { ease: 'easeInOut', duration: 0.7 },
+   },
+   animate: {
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      WebkitClipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      transition: { ease: 'easeInOut', duration: 0.7 },
+   },
+   exit: {
+      clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+      WebkitClipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+      transition: { ease: 'easeInOut', duration: 0.7 },
+   },
 };
 
 const insideMotionVariants: Variants = {
-   initial: (isRight: boolean) => ({
+   initial: {
       x: '-50vw',
-      // x: isRight ? '50vw' : '-50vw',
-   }),
-   animate: (isRight: boolean) => ({
+   },
+   animate: {
       x: 0,
-   }),
-   exit: (isRight: boolean) => ({
+   },
+   exit: {
       x: '50vw',
-      // x: isRight ? '-40vw' : '50vw',
-   }),
+   },
 };
 
 const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
    children,
    pageKey,
 }) => {
-   const { isRight } = useContext(PageTransitionContext);
-
-   const { isMobile, isDesktop } = useReducedMotionVariant();
 
    return (
       <motion.div
          key={pageKey}
-         custom={isRight(pageKey)}
          variants={wrapperVariants}
          initial="initial"
          animate="animate"
@@ -67,13 +46,13 @@ const Layout: React.FC<{ children: React.ReactNode; pageKey: string }> = ({
       >
          <motion.div
             key={pageKey}
-            custom={isRight(pageKey)}
-            variants={isDesktop ? insideMotionVariants : undefined}
-            initial={isDesktop ? 'initial' : ''}
-            animate={isDesktop ? 'animate' : ''}
-            exit={isDesktop ? 'exit' : ''}
+            variants={insideMotionVariants}
+            initial={'initial'}
+            animate={'animate'}
+            exit={'exit'}
             transition={{
                duration: 1,
+               ease: 'easeInOut',
             }}
          >
             {children}
