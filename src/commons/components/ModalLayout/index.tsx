@@ -83,7 +83,7 @@ const ModalLayout = forwardRef<
                        animate="animate"
                        initial="initial"
                        exit="exit"
-                       className="fixed inset-0 z-0 bg-[#00000099]"
+                       className="fixed inset-0 z-[999] bg-[#00000099]"
                     ></motion.div>
                     {typeof children == 'function' ? children({ close, open, toggle }) : children}
                  </>

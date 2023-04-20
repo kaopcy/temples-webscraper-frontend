@@ -79,7 +79,7 @@ const CsvPopup = forwardRef<IModalHandler>((_, ref) => {
             animate="animate"
             initial="initial"
             exit="exit"
-            className="fixed top-1/2 left-1/2 flex w-[300px] flex-col overflow-hidden  rounded-md bg-[#383838]  text-white"
+            className="fixed z-[1000] top-1/2 left-1/2 flex w-[300px] flex-col overflow-hidden  rounded-md bg-[#383838]  text-white"
          >
             <div className="w-full border-b py-5 text-center text-base font-bold tracking-wide">
                โหลด csv รายชื่อวัดไทย
