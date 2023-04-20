@@ -42,8 +42,11 @@ export class CodeBlockBuilder {
    private name: string = '';
    private description: string = '';
 
-   constructor(name: string) {
+   private startLine: number = 1;
+
+   constructor(name: string, startLine: number) {
       this.name = name;
+      this.startLine = startLine;
    }
 
    addLine(line: string) {
@@ -66,11 +69,15 @@ export class CodeBlockBuilder {
    }
 
    getLine(lineNum: number) {
-      return this.code[lineNum];
+      return this.code[lineNum - (this.startLine - 1)];
    }
 
    getName() {
       return this.name;
+   }
+
+   getStartLineNumber() {
+      return this.startLine;
    }
 
    getDescription() {

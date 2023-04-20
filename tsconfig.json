@@ -26,6 +26,6 @@
             "@/modules/*": ["./src/modules/*"],
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/modules/RegexExplain/configs/code1.config.tsx", "src/commons/utils/matchHtml.js"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/modules/RegexExplain/configs/code1.config.tsx", "src/commons/utils/matchHtml.js", "src/modules/RegexExplain/utils/splitInputOutputString.ts"],
     "exclude": ["node_modules"]
 }

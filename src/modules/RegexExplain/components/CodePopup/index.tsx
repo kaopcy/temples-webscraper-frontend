@@ -1,14 +1,16 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
-import { Variants, motion } from 'framer-motion';
-import { forwardRef } from 'react';
 import ModalLayout, { IModalHandler } from '@/components/ModalLayout';
 import { Icon } from '@iconify/react';
-import { ProvinceEnum } from '@/types/filter.type';
-import { provinceTranslator } from '@/utils/getTranslateProvince';
+import { Variants, motion } from 'framer-motion';
+import { forwardRef, useRef } from 'react';
 import { useCodeBlock } from '../../hooks/useCodeBlock';
+import { useMode } from '../../hooks/useMode';
 import CodePopupInput from './CodePopupInput';
+import { classname } from '@/utils/getClassname';
+import CodePopupOutput from './CodePopupOutput';
+import { useSyncScroll } from '../../hooks/useScrollLink';
 
 const ContainerVariants: Variants = {
    initial: {
@@ -40,6 +42,8 @@ const CodePopup = forwardRef<IModalHandler>((_, ref) => {
    const selectedLine = useCodeBlock()((state) => state.selectedLine);
    const codeBlock = useCodeBlock()((state) => state.codeBlock);
 
+   const mode = useMode((state) => state.mode);
+
    const currentSelectedDescription = selectedLine
       ? codeBlock.getAllSameZoneLine(selectedLine)[0]?.getDescription()
       : null;
@@ -51,7 +55,10 @@ const CodePopup = forwardRef<IModalHandler>((_, ref) => {
             animate="animate"
             initial="initial"
             exit="exit"
-            className="fixed top-1/2 left-1/2 flex w-full max-w-[1000px] flex-col rounded-md   bg-white p-4 text-text"
+            className={classname(
+               'fixed top-1/2 left-1/2 z-[1000] flex  w-[90%] flex-col rounded-md   bg-white p-4 text-text',
+               mode ? 'max-w-none' : 'max-w-[1000px]',
+            )}
          >
             <button
                type="button"
@@ -67,10 +74,11 @@ const CodePopup = forwardRef<IModalHandler>((_, ref) => {
                   customStyle={{
                      padding: '15px 17px 17px 17px',
                      boxSizing: 'content-box',
+                     fontSize: mode ? '20px' : '16px',
                      borderRadius: '6px',
                   }}
                   codeTagProps={{
-                     className: 'flex flex-col  w-full  overflow-hidden ',
+                     className: 'flex flex-col  w-full  overflow-hidden font-code',
                   }}
                   lineNumberStyle={{
                      width: '42px',
@@ -79,17 +87,27 @@ const CodePopup = forwardRef<IModalHandler>((_, ref) => {
                   style={nightOwl}
                />
             )}
-
-            <div className="mt-14 flex items-stretch gap-4">
-               {selectedLine !== null && (
-                  <>
-                     <CodePopupInput text={currentSelectedDescription?.input ?? ''} label="Input" />
-                     <CodePopupInput
-                        text={currentSelectedDescription?.output ?? ''}
-                        label="Output"
-                     />
-                  </>
-               )}
+            <div className="relative mt-14">
+               <div className="flex max-h-[400px] items-stretch gap-4 overflow-y-auto ">
+                  {selectedLine !== null && (
+                     <>
+                        <CodePopupInput
+                           text={currentSelectedDescription?.input ?? ''}
+                           label="Input"
+                        />
+                        <CodePopupOutput
+                           text={currentSelectedDescription?.output ?? ''}
+                           label="Output"
+                        />
+                     </>
+                  )}
+               </div>
+               <div className="absolute bottom-full left-3 rounded-t-md bg-text px-4 py-1 text-white">
+                  input
+               </div>
+               <div className="absolute bottom-full left-[calc(50%+16px)] rounded-t-md bg-text px-4 py-1 text-white">
+                  output
+               </div>
             </div>
          </motion.div>
       </ModalLayout>

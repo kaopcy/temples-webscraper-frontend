@@ -65,6 +65,8 @@ export function App({ Component, ...rest }: AppProps) {
    return (
       <Provider store={store}>
          <main className={`${LineSeedFont.variable} ${MonoFont.variable} font-primary`}>
+            
+            <div id="present"></div>
             <BackgroundTransition router={router}>
                <PageTransitionProvider>
                   <AnimatePresence

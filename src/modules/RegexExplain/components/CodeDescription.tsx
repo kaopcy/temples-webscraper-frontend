@@ -3,7 +3,9 @@ import { useCodeBlock } from '../hooks/useCodeBlock';
 const CodeDescription = () => {
    const codeBlock = useCodeBlock()((state) => state.codeBlock);
 
-   return <div className="my-10 text-base md:text-xl leading-8 text-white indent-10 ">{codeBlock.getDescription()}</div>;
+   return <div className="mt-12 mb-5 text-base md:text-xl leading-8 text-white " style={{
+      whiteSpace: 'break-spaces'
+   }}>{codeBlock.getDescription()}</div>;
 };
 
 export default CodeDescription;

@@ -53,12 +53,21 @@ export const Test3 = () => {
       <>
          <div className="mb-3 inline-block indent-10 tracking-wide text-white">
             {
-               "code ส่วนนี้ เป็นการจำกัดขอบเขตจาก string ที่เป็น html code ทั้งหมด ให้เหลือส่วน html code เฉพาะที่เกี่ยวข้อง\n \
+               'code ส่วนนี้ เป็นการจำกัดขอบเขตจาก string ที่เป็น html code ทั้งหมด ให้เหลือส่วน html code เฉพาะที่เกี่ยวข้อง\n \
 โดยลักษณะของ pattern ที่จะทำการจำกัดขอบเขตนั้น ช่วงเริ่มต้นของ string จะเป็น main tag ซึ่ง character หลังจากนั้น\n \
 จะเป็น character อะไรก็ได้ ผ่านการกำหนดเงื่อนไขรหัส unicode ตั้งแต่ 0000 จนถึง FFFF และไม่จำกัดจำนวน character \n \
-เพียงแต่ช่วงสุดท้ายของ string จะเป็น span tag ที่มีข้อความว่า 'ดูเพิ่ม'\n \
-แล้ว pattern ดังกล่าว นำไปใช้กับ findall โดยเป็น funtion จาก re library ซึ่งจะต้องระบุ arguments ต่าง ๆ \n \
-ซึ่ง argument แรก จะเป็น pattern ซึ่งก็คือ "
+เพียงแต่ช่วงสุดท้ายของ string จะเป็น span tag ที่มีข้อความว่า '
+            }
+            <Code>'ดูเพิ่ม'</Code>
+            {
+               '\n \
+               แล้ว pattern ดังกล่าว นำไปใช้กับ '
+            }
+            <Code1>findall</Code1>
+
+            {
+               ' โดยเป็น funtion จาก re library ซึ่งจะต้องระบุ arguments ต่าง ๆ \n \
+ซึ่ง argument แรก จะเป็น pattern ซึ่งก็คือ '
             }
             <Code>{"'<main[\\u0000-\\uFFFF]*id='ดูเพิ่ม'>ดูเพิ่ม</span>'"}</Code>
             {
@@ -81,7 +90,10 @@ export const Test4 = () => {
          <div className="mb-3 inline-block indent-10 tracking-wide text-white">
             {
                'code ส่วนนี้ เป็นการค้นหารูปแบบ html code โดยมีลักษณะของ pattern ที่ตัวเริ่มต้นของ string นั้น จะเป็น open tag \n \
-               ของ li tag แล้วถัดมาจะเป็น character อะไรก็ได้ ผ่านการกำหนดเงื่อนไขเป็น . ซึ่งไม่จำกัดจำนวน character แต่ส่วนสุดท้ายของ string \n \
+               ของ li tag แล้วถัดมาจะเป็น character อะไรก็ได้ ผ่านการกำหนดเงื่อนไขเป็น '}
+               <Code>.</Code>
+               
+               {' ซึ่งไม่จำกัดจำนวน character แต่ส่วนสุดท้ายของ string \n \
                จะปิดท้ายด้วย close tag ของ li tag เสมอ\n \
                แล้ว pattern ดังกล่าว นำไปใช้กับ '
             }
