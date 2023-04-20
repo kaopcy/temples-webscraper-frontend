@@ -36,7 +36,7 @@ const AllTemples: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ 
                         </div>
                         <div className="h-1 w-1 self-center rounded-full bg-text-lighter"></div>
                         <div className=" text-lg   text-text-light ">
-                           <span className="text-base">{province.temples.length}</span> จังหวัด
+                           <span className="text-base">{province.temples.length}</span> วัด
                         </div>
                      </div>
                      <div
