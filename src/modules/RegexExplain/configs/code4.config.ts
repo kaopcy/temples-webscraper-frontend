@@ -18,6 +18,6 @@ codeBlock
             '<remove><li><a href="/w/index.php?title=%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%99%E0%B8%B2&amp;action=edit&amp;redlink=1" class="new" title="วัดหัวนา (ไม่มีหน้านี้)">วัดหัวนา</a> </remove>ตำบลเวียงใต้<remove></li></remove>',
          ),
    )
-   .addSibling(codeBlock.addLine("    list_str = re.findall('ตำบล[\u0E00-\u0E60]*', html_str)"))
+   .addSibling(codeBlock.addLine("    list_str = re.findall('ตำบล[\\u0E00-\\u0E60]*', html_str)"))
    .addSibling(codeBlock.addLine('    return list_str[0] if len(list_str) != 0 else ""'))
    .addSibling(codeBlock.addSpace());

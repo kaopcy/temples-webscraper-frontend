@@ -8,13 +8,12 @@ import { codeBlock as codeBlock4 } from './configs/code4.config';
 import { codeBlock as codeBlock5 } from './configs/code5.config';
 import { codeBlock as codeBlock6 } from './configs/code6.config';
 
+import { classname } from '@/utils/getClassname';
+import { Icon } from '@iconify/react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { CodeBlockStore } from './contexts/CodeBlockStore';
 import { useMode } from './hooks/useMode';
-import { classname } from '@/utils/getClassname';
-import { createPortal } from 'react-dom';
-import { useEffect, useRef, useState } from 'react';
-import { useUpdateEffect } from 'react-use';
-import { Icon } from '@iconify/react';
 
 const RegexExplain: React.FC = () => {
    const mode = useMode((state) => state.mode);
@@ -81,6 +80,56 @@ const RegexExplain: React.FC = () => {
                <CodePlain />
             </CodeBlockStore>
 
+            
+            <div className="mt-12 mb-5 text-base leading-8 text-white md:text-xl ">
+               <div className="indent-12 mb-4">
+                  สำหรับ section นี้ จะเป็นการอธิบายถึงเบื้องหลังการ scraping ของวัดในแต่ละจังหวัด
+                  ซึ่ง library ที่เป็นตัวเอกในครั้งนี้ ประกอบไปด้วย requests library สำหรับการส่ง
+                  request ไปยังจังหวัดที่ต้องการ scraping แล้วรอผลลัพธ์กลับมาเป็น html tag และ re
+                  library สำหรับการสกัดและคัดกรองข้อมูลจาก html tag ที่ได้รับมา
+                  ให้อยู่ในรูปแบบที่ต้องการ ซึ่งมีหลากหลายข้อมูลที่สามารถดึงมาใช้งานได้
+               </div>
+
+               <div className="indent-12 mb-4">
+                  จากเดิม ใน Assignment ของวิชา Theory of Computaion ได้ระบุ requirement
+                  ว่าต้องทำการดึงข้อมูลชื่อวัดในแต่ละจังหวัดมาเพียง ส่วนเดียว แต่ใน website
+                  วัดไทยนี้ จะทำการดึงข้อมูลเพิ่มขึ้นมาอีกสองส่วน คือ link ของวัด กับ
+                  รายละเอียดของวัด เพื่อนำมาแสดงข้อมูลเพิ่มเติม นอกจากชื่อวัดลงใน website
+                  โดยกระบวนการอย่างคร่าว คือ link ของแต่ละวัดที่อยู่ใน a tag นั่น จะนำไป scraping
+                  ต่ออีกครั้ง เพื่อดึงข้อมูล่าง ๆ ของวัดนั้น แล้วนำข้อมูลดังกล่าว
+                  มาคัดกรองให้เหลือส่วนที่จำเป็นในการแสดงเนื้อหาในหน้าเว็บไซต์เท่านั้น
+               </div>
+
+               <div className="indent-12 mb-4">
+                  โดย code ที่นำเสนอใน section นี้ เพื่อให้สามารถทำความเข้าใจการทำงานของ regular
+                  expression ได้ง่ายนั้น จะนำเสนอเป็น code ที่จำลองการทำงาน โดยเน้นไปที่การ scraping
+                  1 ครั้งต่อ 1 link ของจังหวัดนั้น แล้วเก็บข้อมูลปลายทางเป็นรูปแบบ csv เป็นหลัก
+                  ส่วนการทำงานจริงนั้น จะนำ code ดังกล่าว ไปดัดแปลงเป็น code ที่อยู่ใน backend
+                  ซึ่งการ scraping 1 ครั้ง จะทำการ for loop ครบทั้ง 4 จังหวัด
+                  แล้วนำข้อมูลปลายทางที่เก็บได้ทั้งหมด บันทึกลงใน database แทนในภายหลัง{' '}
+               </div>
+
+               <div className="indent-12 mb-4">
+                  นอกจากนี้ ยังมีส่วนการทำงานที่ยังไม่ได้กล่าวถึง คือ link รูปภาพของแต่ละวัด ซึ่ง
+                  website วัดไทย ก็ทำการแสดงรูปภาพของแต่ละวัดด้วย แต่ใน section นี้
+                  ขอไม่กล่าวถึงกระบวนการดังกล่าว เนื่องจากมีรายละเอียดขั้นตอนเป็นจำนวนมาก
+               </div>
+
+               <div className="indent-12 mb-4">
+                  source code ที่จำลองการทำงาน scraping สามารถดูได้ที่ link นี้, ส่วน source code
+                  ที่ได้ดัดแปลงไปทำงานบน backend สามารถดูได้ที่ link นี้ และ source code
+                  ทั้งหมดที่เป็น backend สามารถดู repository ได้ที่ link นี้
+               </div>
+
+               <div className="indent-12 mb-4">
+                  หลังจากนี้ จะเป็นการอธิบายการทำงาน regular expression เป็นส่วน ๆ
+                  เพื่อให้เห็นภาพการทำงานได้ง่าย และแต่ละส่วนการทำงานนั้น จะมีตัวอย่าง input
+                  ก่อนคัดกรอง และ output หลังคัดกรอง โดยผ่าน regular expression ซึ่งตัวอย่างทั้ง
+                  input และ output ในความเป็นจริงนั้น จะเป็น string ที่มีความยาวมาก
+                  จึงต้องทำการตัดและย่อ html code บางส่วนออกไป เพื่อให้เห็นการคัดกรองที่ง่ายมากขึ้น
+                  โดยใช้สัญลักษณ์ (...) ในการย่อ html code ให้กระชับขึ้น
+               </div>
+            </div>
             <div className="mt-20 flex items-center  gap-x-4 self-center">
                <button
                   onClick={onClick}

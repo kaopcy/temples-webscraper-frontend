@@ -4,7 +4,9 @@ import { Description } from '../utils/DescriptionBuilder';
 import { Test, Test2, Test3, Test4 } from './test';
 
 export const codeBlock = new CodeBlockBuilder('test.python' , 1).addDescription(
-   '\t\t\tสำหรับ section นี้ จะเป็นการอธิบายถึงเบื้องหลังการ scraping ของวัดในแต่ละจังหวัด ซึ่ง library ที่เป็นตัวเอกในครั้งนี้ ประกอบไปด้วย requests library สำหรับการส่ง request ไปยังจังหวะที่ต้องการ scraping และรอผลลัพธ์กลับมาเป็น html tag และ re library\nสำหรับการสกัดและคัดกรองข้อมูลจาก html tag ที่ได้รับมา ไม่ว่าจะเป็น ชื่อวัด, url ของวัด, ตำบลของวัด และ รายละเอียดของวัด',
+   'สำหรับ section นี้ จะเป็นการอธิบายถึงเบื้องหลังการ scraping ของวัดในแต่ละจังหวัด ซึ่ง library ที่เป็นตัวเอกในครั้งนี้ ประกอบไปด้วย \
+   requests library สำหรับการส่ง request ไปยังจังหวัดที่ต้องการ scraping แล้วรอผลลัพธ์กลับมาเป็น html tag และ re library \
+   สำหรับการสกัดและคัดกรองข้อมูลจาก html tag ที่ได้รับมา ให้อยู่ในรูปแบบที่ต้องการ ซึ่งมีหลากหลายข้อมูลที่สามารถดึงมาใช้งานได้ '
 );
 codeBlock
    .addLine('provinces = {')

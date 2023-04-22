@@ -22,4 +22,10 @@ codeBlock
          '    all_temple_list.append([link, name, sub_district if sub_district else " ", detail])',
       ),
    )
+   .addSibling(codeBlock.addSpace())
+   .addSibling(codeBlock.addLine("filename = 'temple_list_ver_10.csv'"))
+   .addSibling(codeBlock.addSpace())
+   .addSibling(codeBlock.addLine("with open(filename, 'w', newline='') as csvfile:"))
+   .addSibling(codeBlock.addLine('    csv_writer = csv.writer(csvfile)'))
+   .addSibling(codeBlock.addLine('    csv_writer.writerows(all_temple_list)'))
    .addSibling(codeBlock.addSpace());

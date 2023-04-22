@@ -20,8 +20,8 @@ const HighlighterContainer: React.FC = () => {
 
    return (
       <section className="my-auto  w-full  overflow-hidden  rounded-md border border-text">
-         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 font-code text-white">
-            {/* {codeBlock.getName()} */}
+         <div className="flex h-10 w-full items-center bg-[#484A50] p-5 font-primary text-white">
+            {codeBlock.getName()}
          </div>
 
          <div className="h-full w-full   overflow-hidden border-text-light">
